@@ -1,0 +1,26 @@
+<div class="container col-xs-6 center">
+
+<% unless @users.empty? %>
+  <div class="margin-top ">
+  <h2>Inactive Users</h2>
+  </div>
+<% else %>
+  <div class="margin-top ">
+  <h2>There are no registrations pending approval</h2>
+  </div>
+<% end %>
+
+<%= will_paginate @users %>
+
+<table class="table table-striped">
+<% @users.each do |user| %>
+<tr>
+  <td><%= user.email %></td>
+  <td><%= form_tag enable_path(user.id), method: :post, :class => "form-inline" do %>
+    <%= submit_tag "Enable", name: nil, class: "btn btn-default btn-success" %>
+<% end %></td>
+</tr>
+<% end %>
+</table>
+<%= will_paginate @users %>
+</div>
