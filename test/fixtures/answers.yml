@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  filling_id: 
+  content: MyString
+  category: MyString
+
+two:
+  filling_id: 
+  content: MyString
+  category: MyString

@@ -1,0 +1,31 @@
+<div class="container col-xs-10 center text-center">
+    <h2><%= @form.title %></h2>
+    <%= form_for @filling do |f| %>
+    <% @form.questions.each do |question| %>
+    <div class="nested-fields transparent-box">
+        <% if question.category == "text" %>
+        <h4>Text question</h4>
+        <%= question.description %>
+        <% @filling.answers.build %>
+        <%= f.fields_for :answer do |answer| %>
+        <%= render :partial => "/fillings/text_answer_fields", :locals => {:f => answer, :f_parent => f, :form_actions_visible => false, :show_features => true} %>
+        <% end -%>
+        <% elsif question.category == "multiple" %>
+        <h4>Multiple choice question</h4>
+        <%= question.description %>
+        <% question.choices.each do |choice| %>
+        <%= choice.content %>
+        <% @filling.answers.build %>
+        <%= f.fields_for :answer do |answer| %>
+        <%= render :partial => "/fillings/multiple_answer_fields", :locals => {:f => answer, :f_parent => f, :form_actions_visible => false, :show_features => true} %>
+        <% end -%>
+
+        <% end %>
+        <% end %>
+    </div>
+    <% end %>
+    <%= f.submit %>
+    <% end %>
+    <%= link_to 'Edit', edit_form_path(@form) %> |<%= link_to 'Back', forms_path %>
+</div>
+<!-- /container -->

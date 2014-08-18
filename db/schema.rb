@@ -11,15 +11,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814093011) do
+ActiveRecord::Schema.define(version: 20140818114131) do
+
+  create_table "answers", force: true do |t|
+    t.integer  "filling_id"
+    t.integer  "question_id"
+    t.string   "content"
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["filling_id"], name: "index_answers_on_filling_id"
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
+
+  create_table "choices", force: true do |t|
+    t.string   "content"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "choices", ["question_id"], name: "index_choices_on_question_id"
+
+  create_table "fillings", force: true do |t|
+    t.integer  "form_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fillings", ["form_id"], name: "index_fillings_on_form_id"
 
   create_table "forms", force: true do |t|
     t.string   "title"
     t.boolean  "published"
     t.boolean  "open"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "picks", force: true do |t|
+    t.integer  "answer_id"
+    t.integer  "choice_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "picks", ["answer_id"], name: "index_picks_on_answer_id"
+  add_index "picks", ["choice_id"], name: "index_picks_on_choice_id"
+
+  create_table "questions", force: true do |t|
+    t.string   "description"
+    t.string   "category"
+    t.boolean  "required"
+    t.integer  "form_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "questions", ["form_id"], name: "index_questions_on_form_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false

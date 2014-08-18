@@ -144,7 +144,7 @@ body:before {
 }
 
 .margin-top {
-  margin-top: 100px;
+  margin-top: 10px;
 }
 
 .line-height {
@@ -180,3 +180,7 @@ body:before {
     color: #468847;
     text-align: left;
  }
+
+input.field {
+    width: 95%;
+}

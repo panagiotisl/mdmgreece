@@ -1,0 +1,20 @@
+<div class="nested-fields transparent-box">
+	<h4>Text question</h4>
+    <div class="field">
+    	<%= f.hidden_field :category, :value => :text %>
+        <table class="table">
+            <tr>
+                <td style="width:15%">
+                    <%= f.label :description %>
+                </td>
+                <td>
+                    <%= f.text_field :description, :class => 'big' %>
+                </td>
+                <td style="width:7%">
+                    <%= link_to_remove_association raw("<span class=\"glyphicon glyphicon-remove\"></span>"), f %>
+                </td>
+            </tr>
+        </table>
+    </div>
+	<div style="clear: both;"></div>
+</div>

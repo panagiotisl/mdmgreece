@@ -1,0 +1,7 @@
+<div class="center text-center">
+<h2 class="form-signin-heading">New form</h2>
+
+<%= render 'form' %>
+
+</div> <!-- /container -->
+

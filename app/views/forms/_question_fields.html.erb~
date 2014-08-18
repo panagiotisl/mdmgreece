@@ -1,0 +1,22 @@
+<div class="nested-fields">
+  <div class="field">
+    <%= f.label :description %>
+    <br/>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.check_box :done %>
+    <%= f.label :done %>
+  </div>
+  <%= link_to_remove_association "remove question", f %>
+  <h4>Choices</h4>
+  <div id="choices">
+    <%= f.fields_for :choices do |choice| %>
+      <%= render 'choice_fields', :f => choice %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'add choice', f, :choices %>
+    </div>
+  </div>
+</div>
+

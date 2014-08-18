@@ -1,0 +1,30 @@
+<div class="container col-xs-10 center text-center">
+    <h2><%= @form.title %></h2>
+    <%= form_for :filling, :url => {:action => "fill"} do |f| %>
+	<%= f.hidden_field :form_id, :value => params[:id] %>
+    <% @form.questions.each do |question| %>
+    <div class="nested-fields transparent-box">
+        <% if question.category == "text" %>
+        <h4><%=question.description %></h4>
+        <% @filling.answers.build %>
+        <%= f.fields_for "answers_attributes" do |answer| %>
+        <%= render :partial => "/fillings/text_answer_fields", :locals => {:f => answer, :f_parent => f, :form_actions_visible => false, :show_features => true} %>
+        <% end -%>
+        <% elsif question.category == "multiple" %>
+        <h4><%=question.description %></h4>
+        <table class="table table-nonfluid">
+            <% question.choices.each do |choice| %>
+            <% @filling.answers.build %>
+            <%= f.fields_for :answer do |answer| %>
+            <%= render :partial => "/fillings/multiple_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :f => answer, :f_parent => f, :form_actions_visible => false, :show_features => true} %>
+            <% end -%>
+            <% end %>
+        </table>
+        <% end %>
+    </div>
+    <% end %>
+    <%= f.submit %>
+    <% end %>
+    <%= link_to 'Edit', edit_form_path(@form) %>|<%= link_to 'Back', forms_path %>
+</div>
+<!-- /container -->

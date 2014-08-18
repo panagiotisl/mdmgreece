@@ -1,0 +1,35 @@
+class FormsController < ApplicationController
+
+  def new
+    @form = Form.new
+  end
+
+  def create
+    @form = current_user.forms.create(form_params)
+
+    respond_to do |format|
+      if @form.save
+        format.html { redirect_to root_path, notice: 'Form was successfully created.' }
+        format.json { render :show, status: :created, location: @form }
+        format.js
+      else
+        format.html { render :new }
+        format.json { render json: @form.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def index
+    @forms = current_user.forms
+  end
+
+  def show
+    @form = Form.find(params[:id])
+  end
+
+  private
+
+    def form_params
+      params.require(:form).permit(:user_id, :title, questions_attributes: [:id, :description, :type, :done, :_destroy])
+    end
+end

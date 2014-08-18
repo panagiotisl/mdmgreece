@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyString
+  type: 
+  done: false
+  form_id: 
+
+two:
+  description: MyString
+  type: 
+  done: false
+  form_id: 

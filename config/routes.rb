@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
 
   resources :forms
+  resources :fillings
 
   get '/inactive', to: 'users#index_inactive', as: :inactive
-  post '/enable/:id',  to: 'users#enable'        , as: :enable
+  post '/enable/:id',  to: 'users#enable'    , as: :enable
+  post '/forms/:id/fill', to: 'forms#fill'       , as: :fill
 
   root to: 'static_pages#home'
   get '/help',    to: 'static_pages#help'

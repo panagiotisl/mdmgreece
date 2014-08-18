@@ -4,6 +4,7 @@ class CreateForms < ActiveRecord::Migration
       t.string :title
       t.boolean :published
       t.boolean :open
+      t.references :user
 
       t.timestamps
     end
