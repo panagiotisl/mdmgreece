@@ -147,6 +147,11 @@ body:before {
   margin-top: 10px;
 }
 
+.big-margin-top {
+  margin-top: 30px;
+}
+
+
 .line-height {
   line-height: 140%; 
   font-size: 10pt;
@@ -192,6 +197,12 @@ input.medium {
     width: auto;
 }
 
+table.center {
+    width:70%; 
+    margin-left:15%; 
+    margin-right:15%;
+}
+  
 .transparent-box {
     -moz-border-radius: 10px;  /* for Firefox */
     -webkit-border-radius: 10px; /* for Webkit-Browsers */

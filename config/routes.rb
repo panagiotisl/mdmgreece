@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get '/inactive', to: 'users#index_inactive', as: :inactive
   post '/enable/:id',  to: 'users#enable'    , as: :enable
-  post '/forms/:id/fill', to: 'forms#fill'       , as: :fill
+  match '/forms/:id/fill', to: 'forms#fill'  , as: :fill      , via: [:post, :patch]
 
   root to: 'static_pages#home'
   get '/help',    to: 'static_pages#help'

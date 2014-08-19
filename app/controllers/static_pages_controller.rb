@@ -2,6 +2,7 @@ class StaticPagesController < ApplicationController
 
   def home
     if signed_in?
+      @my_forms = current_user.forms.paginate(:page => params[:mf_page], :per_page => 10)
     end
   end
   

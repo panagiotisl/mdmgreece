@@ -4,5 +4,4 @@ class Filling < ActiveRecord::Base
   accepts_nested_attributes_for :answers, :reject_if => :all_blank, :allow_destroy => true
   validates_presence_of :form_id
 
-
 end

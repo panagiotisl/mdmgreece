@@ -1,5 +1,34 @@
-<% if signed_in?%>
-
+<% if signed_in? %>
+<div class="transparent-box text-center">
+    <h3>My forms</h3>
+    <div class="big-margin-top">
+        <%= will_paginate @my_forms, :param_name => 'mf_page' %>
+        <table class="table table-nonfluid center">
+            <tbody>
+                <% @my_forms.each do |form| %>
+                <tr>
+                    <td>
+                        <%= form.title %>
+                    </td>
+                    <td>
+                        Filled <%= form.fillings.size %>time(s)
+                    </td>
+                    <td>
+                        <%= link_to raw("<span class=\"glyphicon glyphicon-pencil\"></span> Fill"), form %>
+                    </td>
+                    <td>
+                        <%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span> Edit"), edit_form_path(form) %>
+                    </td>
+                    <td>
+                        <%= link_to raw("<span class=\"glyphicon glyphicon-remove\"></span> Remove"), form, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= will_paginate @my_forms, :param_name => 'mf_page' %>
+    </div>
+</div>
 <% else %>
 <% if false %>
 <div id="myCarousel" class="carousel slide">

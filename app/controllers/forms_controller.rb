@@ -1,9 +1,9 @@
 class FormsController < ApplicationController
-
+  
   def new
     @form = Form.new
   end
-
+  
   def create
     @form = current_user.forms.create(form_params)
     if @form.save
@@ -13,35 +13,64 @@ class FormsController < ApplicationController
       render :new
     end
   end
-
+  
   def fill
     @filling = Filling.create(filling_params)
+    @filling.form.questions.each do |question|
+      @answer = @filling.answers.build
+      @answer.category = question.category
+      @answer.question_id = question.id
+      if question.category == "text"
+        @answer.content = params[question.id.to_s]
+      elsif question.category == "multiple"
+        @pick = @answer.picks.build
+        @pick.choice_id = params[question.id.to_s]
+        #unless  @pick.save
+        #  flash[:error] = @pick.errors.full_messages.to_sentence
+        #  raise ActiveRecord::Rollback
+        #end
+      end
+      #unless  @answer.save
+      #    flash[:error] = @answer.errors.full_messages.to_sentence
+      #    raise ActiveRecord::Rollback
+      #  end
+    end
     if @filling.save
       redirect_to @filling, notice: 'Form was successfully filled.'
     else
       flash[:error] = @filling.errors.full_messages.to_sentence
-      @form = @filling.form
       render :show
     end
   end
-
+  
   def index
-    @forms = current_user.forms
+    if params[:query]
+      @forms = Form.where("title LIKE \"%#{params[:query]}%\"").paginate(:page => params[:f_page], :per_page => 10)
+      @my_forms = current_user.forms.where("title LIKE \"%#{params[:query]}%\"").paginate(:page => params[:mf_page], :per_page => 10)
+    else  
+      @forms = Form.paginate(:page => params[:f_page], :per_page => 10)
+      @my_forms = current_user.forms.paginate(:page => params[:mf_page], :per_page => 10)
+    end
   end
-
+  
   def show
     @form = Form.find(params[:id])
-    @filling = Filling.new
+    @filling = @form.fillings.new
   end
-
-  private
-
-    def form_params
-      params.require(:form).permit(:user_id, :title, questions_attributes: [:id, :description, :category, :_destroy, choices_attributes: [:id, :content, :_destroy]])
-    end
   
-    def filling_params
-      params.require(:filling).permit(:form_id, answers_attributes: [:id, :content, :category, :question_id, :_destroy, picks_attributes: [:id, :choice_id, :_destroy]])
-    end
-
+  def destroy
+    Form.find(params[:id]).destroy
+    redirect_to forms_path, :flash => { :success => "Form destroyed." }
+  end
+  
+  private
+  
+  def form_params
+    params.require(:form).permit(:user_id, :title, questions_attributes: [:id, :description, :category, :_destroy, choices_attributes: [:id, :content, :_destroy]])
+  end
+  
+  def filling_params
+    params.require(:filling).permit(:form_id, answers_attributes: [:id, :content, :category, :question_id, :_destroy, picks_attributes: [:id, :choice_id, :_destroy]])
+  end
+  
 end

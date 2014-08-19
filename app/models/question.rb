@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
 
 
   def validate_choices
-    errors.add(:choices, "There must be more than one choices") if self.category == "multiple" and choices.size < 2
+    errors.add(:choices, " must be more than one") if self.category == "multiple" and choices.size < 2
   end
 
 end

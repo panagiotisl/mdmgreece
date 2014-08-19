@@ -1,0 +1,1 @@
+<input class="big" type="text" name="<%= question_id %>">

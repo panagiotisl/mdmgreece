@@ -1,0 +1,8 @@
+<tr>
+    <td>
+        <input type="radio" name="<%= question_id %>" value="<%= choice_id %>">
+    </td>
+    <td>
+        <%= content %>
+    </td>
+</tr>
