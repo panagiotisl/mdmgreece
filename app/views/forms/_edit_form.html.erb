@@ -19,7 +19,7 @@
                 <li class="divider"></li>
             </ul>
         </div></h3>
-    <%= f.fields_for :questions do |question| %>
+    <%= f.fields_for :questions, @form.questions.reverse do |question| %>
 	  <% if question.object.category == "text" %>
         <%= render 'text_question_fields', :f => question %>
 	  <% elsif question.object.category == "multiple" %>

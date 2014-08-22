@@ -1,8 +1,13 @@
 <div class="container col-xs-10 center text-center">
-    <h2><%= @filling.form.title %> <%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_form_path(@filling.form), :class => "btn btn-default", :role => "button" %></h2>
+    <h2><%= @filling.form.title %> 
+
+<% if current_user %>
+<%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_form_path(@filling.form), :class => "btn btn-default", :role => "button" %>
+<% end %>
+</h2>
     <%= form_for @filling, :url => {:action => "fill"} do |f| %>
 	<%= f.hidden_field :form_id, :value => params[:id] %>
-    <% @filling.form.questions.each do |question| %>
+    <% @filling.form.questions.reverse.each do |question| %>
     <div class="nested-fields transparent-box">
         <% if question.category == "text" %>
         <h4><%=question.description %></h4>
