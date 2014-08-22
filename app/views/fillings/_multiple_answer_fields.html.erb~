@@ -2,7 +2,7 @@
     <td>
         <input type="radio" name="<%= question_id %>" value="<%= choice_id %>" <%= choice_id.to_s == params[question_id.to_s] ? "checked" : "" %> >
     </td>
-    <td align="left">
+    <td align="left">>
         <%= content %>
     </td>
 </tr>
