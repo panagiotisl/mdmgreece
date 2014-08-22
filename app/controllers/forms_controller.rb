@@ -62,8 +62,8 @@ class FormsController < ApplicationController
   
   def index
     if params[:query]
-      @forms = Form.where("title LIKE \"%#{params[:query]}%\"").paginate(:page => params[:f_page], :per_page => 10)
-      @my_forms = current_user.forms.where("title LIKE \"%#{params[:query]}%\"").paginate(:page => params[:mf_page], :per_page => 10) if current_user
+      @forms = Form.where("title LIKE \'%#{params[:query]}%\'").paginate(:page => params[:f_page], :per_page => 10)
+      @my_forms = current_user.forms.where("title LIKE \'%#{params[:query]}%\'").paginate(:page => params[:mf_page], :per_page => 10) if current_user
     else  
       @forms = Form.paginate(:page => params[:f_page], :per_page => 10)
       @my_forms = current_user.forms.paginate(:page => params[:mf_page], :per_page => 10)  if current_user

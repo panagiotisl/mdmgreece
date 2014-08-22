@@ -31,12 +31,14 @@ gem 'devise'
 gem 'will_paginate', '~> 3.0'
 gem "cocoon"
 
-group :development, :test do
-  gem 'sqlite3'
-end
+gem 'pg', '0.15.1'
+
+#group :development, :test do
+#  gem 'sqlite3'
+#end
 
 group :productioin do
-  gem 'pg', '0.15.1'
+#  gem 'pg', '0.15.1'  
   gem 'rails_12factor'
 end
 

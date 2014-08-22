@@ -1,18 +1,8 @@
 source 'https://rubygems.org'
 
-
+ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
-
-group :development, :test do
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-end
-
-group :productioin do
-  # Use pg as the database for Active Record
-  gem 'pg', '0.15.1'
-end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -40,6 +30,18 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'will_paginate', '~> 3.0'
 gem "cocoon"
+
+group :development, :test do
+  gem 'sqlite3'
+end
+
+group :productioin do
+  gem 'pg', '0.15.1'
+  gem 'rails_12factor'
+end
+
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
