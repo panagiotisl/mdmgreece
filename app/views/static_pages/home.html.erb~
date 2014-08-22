@@ -1,42 +1,41 @@
-<% if signed_in?%>
-
-<%= will_paginate @users %>
-
-<% @users.each do |user| %>
-  <%= user.email %>
-  <%= user.approved %>
-<% end %>
-<%= will_paginate @users %>
-
-<% else %>
-<% if false %>
-<div id="myCarousel" class="carousel slide">
-    <!-- Carousel items -->
-    <div class="carousel-inner">
-        <div class="active item">
-            <img src="http://placehold.it/1200x400&amp;text=Fade+effect">
-        </div>
-        <div class="item">
-            <img src="http://placehold.it/1200x400&amp;text=Fade+effect">
-        </div>
-        <div class="item">
-            <img src="http://placehold.it/1200x400&amp;text=Fade+effect">
-        </div>
-    </div><!-- Carousel nav --><a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+<% if signed_in? %>
+<div class="transparent-box text-center">
+    <h3>My forms</h3>
+    <div class="big-margin-top">
+        <%= will_paginate @my_forms, :param_name => 'mf_page' %>
+        <table class="table table-nonfluid center">
+            <tbody>
+                <% @my_forms.each do |form| %>
+                <tr>
+                    <td>
+                        <%= form.title %>
+                    </td>
+                    <td>
+                        Filled <%= form.fillings.size %>time(s)
+                    </td>
+                    <td>
+                        <%= link_to raw("<span class=\"glyphicon glyphicon-pencil\"></span> Fill"), form %>
+                    </td>
+                    <td>
+                        <%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span> Edit"), edit_form_path(form) %>
+                    </td>
+                    <td>
+                        <%= link_to raw("<span class=\"glyphicon glyphicon-remove\"></span> Remove"), form, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= will_paginate @my_forms, :param_name => 'mf_page' %>
+    </div>
 </div>
-<script>
-    $('.carousel').carousel({
-        interval: 8000
-    })
-</script>
-<% end %>
+<% else %>
 <div class="text-center jumbotron">
-    <h1>Welcome to MDM Forms</h1>
-    <h2>You can sign up in order to create forms or you can fill in one of the available forms.</h2>
+    <h1>Medicins du monde Forms</h1>
+    <h2>Sign up in order to create forms or fill in one of the available forms.</h2>
     <%= link_to "Sign Up", new_user_registration_path,
     class: "btn btn-large btn-primary" %>
-    <%= link_to "Empty", new_user_registration_path,
+    <%= link_to "View forms", forms_path,
     class: "btn btn-large btn-primary" %>
 </div>
 <% end %>

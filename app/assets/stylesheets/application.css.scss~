@@ -126,6 +126,10 @@ body:before {
   filter: none;
 }
 
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
 .center {
      float: none;
      margin-left: auto;
@@ -146,6 +150,11 @@ body:before {
 .margin-top {
   margin-top: 10px;
 }
+
+.big-margin-top {
+  margin-top: 30px;
+}
+
 
 .line-height {
   line-height: 140%; 
@@ -181,6 +190,29 @@ body:before {
     text-align: left;
  }
 
-input.field {
+input.big {
     width: 95%;
+}
+input.medium {
+    width: 70%;
+}
+
+.table-nonfluid {
+    width: auto;
+}
+
+table.center {
+    width:70%; 
+    margin-left:15%; 
+    margin-right:15%;
+}
+  
+.transparent-box {
+    -moz-border-radius: 10px;  /* for Firefox */
+    -webkit-border-radius: 10px; /* for Webkit-Browsers */
+    border-radius:10px; /* regular */
+    background-color: rgba(133,187,101,0.3);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 15px;
 }

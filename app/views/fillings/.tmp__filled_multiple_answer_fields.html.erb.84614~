@@ -1,8 +1,0 @@
-<tr>
-    <td>
-        <input type="radio" name="<%= question_id %>" value="<%= choice_id %>" disabled="true" checked="<%= !checked %>">
-    </td>
-    <td>
-        <%= content %>
-    </td>
-</tr>

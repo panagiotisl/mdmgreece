@@ -1,5 +1,8 @@
 class FormsController < ApplicationController
   
+  before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_destroy!, only: [:edit, :update, :destroy]
+  
   def new
     @form = Form.new
   end
@@ -11,6 +14,20 @@ class FormsController < ApplicationController
     else
       flash[:error] = @form.errors.full_messages.to_sentence
       render :new
+    end
+  end
+  
+  def edit
+    @form = Form.find(params[:id])
+  end
+  
+  def update
+    @form = Form.find(params[:id])
+    if @form.update_attributes(form_params)
+      redirect_to @form, notice: 'Form was successfully updated.'
+    else
+      flash[:error] = @form.errors.full_messages.to_sentence
+      render :edit
     end
   end
   
@@ -46,10 +63,10 @@ class FormsController < ApplicationController
   def index
     if params[:query]
       @forms = Form.where("title LIKE \"%#{params[:query]}%\"").paginate(:page => params[:f_page], :per_page => 10)
-      @my_forms = current_user.forms.where("title LIKE \"%#{params[:query]}%\"").paginate(:page => params[:mf_page], :per_page => 10)
+      @my_forms = current_user.forms.where("title LIKE \"%#{params[:query]}%\"").paginate(:page => params[:mf_page], :per_page => 10) if current_user
     else  
       @forms = Form.paginate(:page => params[:f_page], :per_page => 10)
-      @my_forms = current_user.forms.paginate(:page => params[:mf_page], :per_page => 10)
+      @my_forms = current_user.forms.paginate(:page => params[:mf_page], :per_page => 10)  if current_user
     end
   end
   

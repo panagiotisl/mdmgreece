@@ -1,5 +1,10 @@
 <div class="container col-xs-10 center text-center">
-    <h2><%= @filling.form.title %></h2>
+    <h2><%= @filling.form.title %> 
+
+<% if current_user %>
+<%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_form_path(@filling.form), :class => "btn btn-default", :role => "button" %>
+<% end %>
+</h2>
     <%= form_for @filling, :url => {:action => "fill"} do |f| %>
 	<%= f.hidden_field :form_id, :value => params[:id] %>
     <% @filling.form.questions.each do |question| %>
@@ -17,8 +22,7 @@
         <% end %>
     </div>
     <% end %>
-    <%= f.submit %>
+    <%= f.submit "Submit", :class => "btn btn-large btn-primary margin-top" %>
     <% end %>
-    <%= link_to 'Edit', edit_form_path(@filling.form) %>|<%= link_to 'Back', forms_path %>
 </div>
 <!-- /container -->

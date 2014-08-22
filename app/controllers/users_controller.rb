@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
+  
+  before_action :authenticate_admin!
 
-  before_action :authenticate_user!
-
-  def index_inactive
-    @users = User.where(approved: false).reorder("email ASC").paginate(page: params[:page], :per_page => 30)
+  def index
+    @users = User.where(admin: false).reorder("email ASC").paginate(page: params[:page], :per_page => 10)
   end
-
+  
+  def index_inactive
+    @users = User.where(approved: false).reorder("email ASC").paginate(page: params[:page], :per_page => 10)
+  end
+  
   def enable
     @user = User.find(params[:id])
     @user.toggle!(:approved)
@@ -14,5 +18,14 @@ class UsersController < ApplicationController
       format.html { redirect_to inactive_path }
     end
   end
-
+  
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      redirect_to :back, notice: "User deleted"
+    end
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
+  end
+  
 end

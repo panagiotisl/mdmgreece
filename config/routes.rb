@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :fillings
 
   get '/inactive', to: 'users#index_inactive', as: :inactive
+  get '/manage', to: 'users#index', as: :manage
+  match '/users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
+
   post '/enable/:id',  to: 'users#enable'    , as: :enable
   match '/forms/:id/fill', to: 'forms#fill'  , as: :fill      , via: [:post, :patch]
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140818114131) do
+ActiveRecord::Schema.define(version: 20140819124745) do
 
   create_table "answers", force: true do |t|
     t.integer  "filling_id"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140818114131) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "approved",               default: false, null: false
+    t.boolean  "admin",                  default: false, null: false
   end
 
   add_index "users", ["approved"], name: "index_users_on_approved"

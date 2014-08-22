@@ -1,11 +1,11 @@
-<div class="container col-xs-8 center">
+<div class="container col-xs-6 center">
 
 <% unless @users.empty? %>
   <div class="margin-top text-center">
-  <h2>Inactive Users</h2>
+  <h2>Users</h2>
   </div>
 <% else %>
-  <div class="margin-top ">
+  <div class="margin-top text-center">
   <h2>There are no registrations pending approval</h2>
   </div>
 <% end %>
@@ -16,9 +16,6 @@
 <% @users.each do |user| %>
 <tr>
   <td><%= user.email %></td>
-  <td><%= form_tag enable_path(user.id), method: :post, :class => "form-inline" do %>
-    <%= submit_tag "Enable", name: nil, class: "btn btn-default btn-success" %>
-<% end %></td>
   <td><%= form_tag admin_destroy_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "form-inline" do %>
     <%= submit_tag "Delete", name: nil, class: "btn btn-default btn-danger" %>
 <% end %></td>
