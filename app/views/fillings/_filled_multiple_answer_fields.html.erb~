@@ -2,7 +2,7 @@
     <td>
         <input type="radio" name="<%= question_id %>" value="<%= choice_id %>" disabled="true" <%= !checked ? "checked" : "" %> >
     </td>
-    <td align="left">
+    <td>
         <%= content %>
     </td>
 </tr>
