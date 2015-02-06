@@ -12,6 +12,9 @@
         <% if question.category == "text" %>
         <h4><%=question.description %></h4>
         <%= render :partial => "/fillings/text_answer_fields", :locals => {:question_id => question.id} %>
+        <% elsif question.category == "number" %>
+        <h4><%=question.description %></h4>
+        <%= render :partial => "/fillings/number_answer_fields", :locals => {:question_id => question.id} %>
         <% elsif question.category == "multiple" %>
         <h4><%=question.description %></h4>
         <table class="table table-nonfluid">
@@ -19,6 +22,14 @@
             <%= render :partial => "/fillings/multiple_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
             <% end %>
         </table>
+        <% elsif question.category == "dropdown" %>
+          <h4><%=question.description %></h4>
+          <select class="form-control" name="<%= question.id %>">
+            <% question.choices.reverse.each do |choice| %>
+                <%= render :partial => "/fillings/dropdown_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
+            <% end %>
+          </select>
+
         <% end %>
     </div>
     <% end %>

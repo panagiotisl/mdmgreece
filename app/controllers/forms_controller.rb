@@ -39,6 +39,8 @@ class FormsController < ApplicationController
       @answer.question_id = question.id
       if question.category == "text"
         @answer.content = params[question.id.to_s]
+      elsif question.category == "number"
+        @answer.content = params[question.id.to_s]
       elsif question.category == "multiple"
         @pick = @answer.picks.build
         @pick.choice_id = params[question.id.to_s]
@@ -46,6 +48,9 @@ class FormsController < ApplicationController
         #  flash[:error] = @pick.errors.full_messages.to_sentence
         #  raise ActiveRecord::Rollback
         #end
+      elsif question.category == "dropdown"
+        @pick = @answer.picks.build
+        @pick.choice_id = params[question.id.to_s]
       end
       #unless  @answer.save
       #    flash[:error] = @answer.errors.full_messages.to_sentence
