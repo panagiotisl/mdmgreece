@@ -38,7 +38,7 @@ File.open(File.join(Rails.root, 'db', 'eye.csv')) do |lines|
     content = q5.nil? ? 'ΟΧΙ' : q5
     answer5 = filling.answers.build(category: question5.category, content: content, question_id: question5.id)
     answer4 = filling.answers.build(category: question4.category, question_id: question4.id)
-    choice = q2.nil? || q2.empty? ? choice3.id : choice4.id
+    choice = q4.nil? || q4.empty? ? choice3.id : choice4.id
     pick2 = answer4.picks.build(choice_id: choice)
     content = q3.nil? || q3.empty? ? 'ΟΧΙ' : q3
     answer3 = filling.answers.build(category: question3.category, content: content, question_id: question3.id)
