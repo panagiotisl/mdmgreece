@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   post '/enable/:id',  to: 'users#enable'    , as: :enable
   match '/forms/:id/fill', to: 'forms#fill'  , as: :fill      , via: [:post, :patch]
+  get '/forms/:id/stats', to: 'forms#stats', as: :stats
 
   root to: 'static_pages#home'
   get '/help',    to: 'static_pages#help'

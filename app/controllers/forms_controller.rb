@@ -64,7 +64,13 @@ class FormsController < ApplicationController
       render :show
     end
   end
-  
+
+
+  def stats
+    @form = Form.find(params[:id])
+  end
+
+
   def index
     if params[:query]
       @forms = Form.where("title LIKE \'%#{params[:query]}%\'").paginate(:page => params[:f_page], :per_page => 10)

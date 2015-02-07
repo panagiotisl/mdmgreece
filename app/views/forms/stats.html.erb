@@ -1,0 +1,17 @@
+<%= javascript_include_tag '//www.google.com/jsapi', 'chartkick' %>
+
+<h1>Stats for: <%= @form.title %></h1>
+
+<% @form.questions.reverse.each do |question| %>
+    <% case question.category %>
+    <% when 'text' %>
+        <h2><%= question.description %></h2>
+        <%= pie_chart question.answers.group(:content).count %>
+    <% when 'number' %>
+        <h2><%= question.description %></h2>
+        <%= column_chart question.answers.group(:content).count %>
+    <% when 'multiple' %>
+    <h2><%= question.description %></h2>
+    <%= pie_chart question.picks.joins(:choice).group('choices.content').count %>
+    <% end %>
+<% end %>

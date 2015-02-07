@@ -23,24 +23,30 @@ choice4 = question4.choices.build(content: 'Ναι')
 question5 = form.questions.build(category: 'text', description: 'Αγωγή')
 form.save
 
+
+count = 0
 File.open(File.join(Rails.root, 'db', 'eye.csv')) do |lines|
   lines.read.each_line do |line|
-    q1, q2, q3, q4, q5 = line.chomp.split('\t')
+    count += 1
+    puts count
+    q1, q2, q3, q4, q5 = line.chomp.split("\t")
+    #puts "#{q1}:#{q2}:#{q3}:#{q4}:#{q5}"
+    #puts line
     filling = Filling.new
     filling.form_id = form.id
     #filling = Filling.create(form_id: form.id)
-    content = q5.nil? ? 'Όχι' : q5
+    content = q5.nil? ? 'ΟΧΙ' : q5
     answer5 = filling.answers.build(category: question5.category, content: content, question_id: question5.id)
     answer4 = filling.answers.build(category: question4.category, question_id: question4.id)
-    choice = q4.nil? ? choice3.id : choice4.id
+    choice = q2.nil? || q2.empty? ? choice3.id : choice4.id
     pick2 = answer4.picks.build(choice_id: choice)
-    content = q3.nil? ? 'ΟΧΙ' : q3
-    answer3 = filling.answers.build(category: question3.category, content: content, question_id: question4.id)
-    content = q2.nil? ? '0' : q2
+    content = q3.nil? || q3.empty? ? 'ΟΧΙ' : q3
+    answer3 = filling.answers.build(category: question3.category, content: content, question_id: question3.id)
+    content = q2.nil? || q2.empty? ? '0' : q2
     answer2 = filling.answers.build(category: question2.category, content: content, question_id: question2.id)
     answer1 = filling.answers.build(category: question1.category, question_id: question1.id)
     choice = q1.to_s == 'Α' ? choice1.id : choice2.id
     pick1 = answer1.picks.build(choice_id: choice)
-    filling.save
+    filling.save!
   end
 end
