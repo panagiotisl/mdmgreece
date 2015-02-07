@@ -5,36 +5,42 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-admin = User.create(:email => 'mike@madgik.gr', :password => 'foobar23', :password_confirmation => 'foobar23', :approved => true, :admin => true)
-user = User.create(:email => 'scottie@madgik.gr', :password => 'foobar33', :password_confirmation => 'foobar33', :approved => false)
+admin = User.create(:email => 'admin@mdmgreece.gr', :password => 'foobar23', :password_confirmation => 'foobar23', :approved => true, :admin => true)
+user = User.create(:email => 'user1@mdmgreece.gr', :password => 'foobar33', :password_confirmation => 'foobar33', :approved => false)
 
-form = Form.create(title: 'Οφθαλμολογικό Τεστ', user_id: admin.id)
-question1 = Question.create(category: 'multiple', description: 'Φύλο', form_id: form.id)
-choice1 = Choice.create(content: 'Άρρεν', question_id: question1.id)
-choice2 = Choice.create(content: 'Θήλυ', question_id: question1.id)
-question2 = Question.create(category: 'number', description: 'Ηλικία', form_id: form.id)
-question3 = Question.create(category: 'text', description: 'Παρατηρήσεις', form_id: form.id)
-question4 = Question.create(category: 'multiple', description: 'Γυαλιά', form_id: form.id)
-choice3 = Choice.create(content: 'Όχι', question_id: question4.id)
-choice4 = Choice.create(content: 'Ναι', question_id: question4.id)
-question5 = Question.create(category: 'text', description: 'Αγωγή', form_id: form.id)
-
+form = Form.new
+form.title = 'Οφθαλμολογικό Τεστ'
+form.user_id = admin.id
+#form = Form.create(title: 'Οφθαλμολογικό Τεστ', user_id: admin.id)
+question1 = form.questions.build(category: 'multiple', description: 'Φύλο')
+choice1 = question1.choices.build(content: 'Άρρεν')
+choice2 = question1.choices.build(content: 'Θήλυ')
+question2 = form.questions.build(category: 'number', description: 'Ηλικία')
+question3 = form.questions.build(category: 'text', description: 'Παρατηρήσεις')
+question4 = form.questions.build(category: 'multiple', description: 'Γυαλιά')
+choice3 = question4.choices.build(content: 'Όχι')
+choice4 = question4.choices.build(content: 'Ναι')
+question5 = form.questions.build(category: 'text', description: 'Αγωγή')
+form.save
 
 File.open(File.join(Rails.root, 'db', 'eye.csv')) do |lines|
   lines.read.each_line do |line|
     q1, q2, q3, q4, q5 = line.chomp.split('\t')
-    filling = Filling.create(form_id: form.id)
+    filling = Filling.new
+    filling.form_id = form.id
+    #filling = Filling.create(form_id: form.id)
     content = q5.nil? ? 'Όχι' : q5
-    answer5 = Answer.create(filling_id: filling.id, category: question5.category, content: content, question_id: question5.id)
-    answer4 = Answer.create(filling_id: filling.id, category: question4.category, question_id: question4.id)
+    answer5 = filling.answers.build(category: question5.category, content: content, question_id: question5.id)
+    answer4 = filling.answers.build(category: question4.category, question_id: question4.id)
     choice = q4.nil? ? choice3.id : choice4.id
-    pick2 = Pick.create(answer_id: answer4.id, choice_id: choice)
+    pick2 = answer4.picks.build(choice_id: choice)
     content = q3.nil? ? 'ΟΧΙ' : q3
-    answer3 = Answer.create(filling_id: filling.id, category: question3.category, content: content, question_id: question4.id)
+    answer3 = filling.answers.build(category: question3.category, content: content, question_id: question4.id)
     content = q2.nil? ? '0' : q2
-    answer2 = Answer.create(filling_id: filling.id, category: question2.category, content: content, question_id: question2.id)
-    answer1 = Answer.create(filling_id: filling.id, category: question1.category, question_id: question1.id)
+    answer2 = filling.answers.build(category: question2.category, content: content, question_id: question2.id)
+    answer1 = filling.answers.build(category: question1.category, question_id: question1.id)
     choice = q1.to_s == 'Α' ? choice1.id : choice2.id
-    pick1 = Pick.create(answer_id: answer1.id, choice_id: choice1)
+    pick1 = answer1.picks.build(choice_id: choice)
+    filling.save
   end
 end
