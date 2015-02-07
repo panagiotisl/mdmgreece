@@ -11,7 +11,7 @@
                         <%= form.title %>
                     </td>
                     <td>
-                        Filled <%= form.fillings.size %>time(s)
+                      <%= link_to "Filled #{form.fillings.size} time(s)", stats_path(form) %>
                     </td>
                     <td>
                         <%= link_to raw("<span class=\"glyphicon glyphicon-pencil\"></span> Fill"), form %>
@@ -43,7 +43,7 @@
                         <%= form.title %>
                     </td>
                     <td>
-                        Filled <%= form.fillings.size %>time(s)
+                        <%= link_to "Filled #{form.fillings.size} time(s)", stats_path(form) %>
                     </td>
                     <td>
                         <%= link_to raw("<span class=\"glyphicon glyphicon-pencil\"></span> Fill"), form %>
