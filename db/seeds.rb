@@ -24,14 +24,9 @@ question5 = form.questions.build(category: 'text', description: 'Αγωγή')
 form.save
 
 
-count = 0
 File.open(File.join(Rails.root, 'db', 'eye.csv')) do |lines|
   lines.read.each_line do |line|
-    count += 1
-    puts count
     q1, q2, q3, q4, q5 = line.chomp.split("\t")
-    #puts "#{q1}:#{q2}:#{q3}:#{q4}:#{q5}"
-    #puts line
     filling = Filling.new
     filling.form_id = form.id
     #filling = Filling.create(form_id: form.id)
@@ -50,3 +45,28 @@ File.open(File.join(Rails.root, 'db', 'eye.csv')) do |lines|
     filling.save!
   end
 end
+
+form = Form.new
+form.title = 'Οδοντιατρικό Τεστ'
+form.user_id = admin.id
+form.questions.build(category: 'date', description: 'Ημερομηνία Εξέτασης')
+form.questions.build(category: 'text', description: 'Περιοχή-Σχολείο')
+form.questions.build(category: 'number', description: 'Ηλικία')
+form.questions.build(category: 'text', description: 'Περιγραφή Εργασίας - Παρατηρήσεις')
+question5 = form.questions.build(category: 'checkbox', description: 'Εξέταση')
+18.step(11,-1) { |i| question5.choices.build(content: i) }
+21.step(28,1) { |i| question5.choices.build(content: i) }
+48.step(41,-1) { |i| question5.choices.build(content: i) }
+31.step(38,1) { |i| question5.choices.build(content: i) }
+55.step(51,-1) { |i| question5.choices.build(content: i) }
+61.step(65,1) { |i| question5.choices.build(content: i) }
+85.step(81,-1) { |i| question5.choices.build(content: i) }
+71.step(75,1) { |i| question5.choices.build(content: i) }
+question6 = form.questions.build(category: 'multiple', description: 'Έχει επισκεφθεί ποτέ οδοντίατρο;')
+question6.choices.build(content: 'Όχι')
+question6.choices.build(content: 'Ναι')
+form.questions.build(category: 'number', description: 'Εάν ναι, πόσες φορές;')
+question8 = form.questions.build(category: 'multiple', description: 'Βρίσκεται υπό οδοντιατρική παρακολούθηση;')
+question8.choices.build(content: 'Όχι')
+question8.choices.build(content: 'Ναι')
+form.save

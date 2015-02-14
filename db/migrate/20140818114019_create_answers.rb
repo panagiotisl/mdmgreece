@@ -4,6 +4,7 @@ class CreateAnswers < ActiveRecord::Migration
       t.belongs_to :filling, index: true
       t.belongs_to :question, index: true
       t.string :content
+      t.date :date
       t.string :category
 
       t.timestamps

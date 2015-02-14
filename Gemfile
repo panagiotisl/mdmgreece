@@ -31,6 +31,7 @@ gem 'devise', '3.2.4'
 gem 'will_paginate', '~> 3.0'
 gem 'cocoon', '1.2.6'
 gem 'chartkick', '1.3.2'
+gem 'bootstrap-datepicker-rails'
 
 gem 'pg', '0.15.1'
 

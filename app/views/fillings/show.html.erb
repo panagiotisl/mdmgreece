@@ -4,21 +4,26 @@
 	<%= f.hidden_field :form_id, :value => params[:id] %>
     <% @filling.form.questions.reverse.each do |question| %>
     <div class="nested-fields transparent-box">
+      <h4><%=question.description %></h4>
         <% if question.category == "text" %>
-        <h4><%=question.description %></h4>
         <%= render :partial => "/fillings/filled_text_answer_fields", :locals => {:question_id => question.id, :content => @filling.answers.where(:question_id => question.id.to_s).first.content} %>
         <% elsif question.category == "number" %>
-        <h4><%=question.description %></h4>
         <%= render :partial => "/fillings/filled_number_answer_fields", :locals => {:question_id => question.id, :content => @filling.answers.where(:question_id => question.id.to_s).first.content} %>
+        <% elsif question.category == "date" %>
+          <%= render :partial => "/fillings/filled_date_answer_fields", :locals => {:question_id => question.id, :date => @filling.answers.where(:question_id => question.id.to_s).first.date} %>
         <% elsif question.category == "multiple" %>
-        <h4><%=question.description %></h4>
         <table class="table table-nonfluid">
             <% question.choices.reverse.each do |choice| %>
             <%= render :partial => "/fillings/filled_multiple_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id, :checked => @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty?} %>
             <% end %>
         </table>
+        <% elsif question.category == "checkbox" %>
+          <table class="table table-nonfluid">
+            <% question.choices.reverse.each do |choice| %>
+                <%= render :partial => "/fillings/filled_checkbox_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id, :checked => @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty?} %>
+            <% end %>
+          </table>
         <% elsif question.category == "dropdown" %>
-        <h4><%=question.description %></h4>
         <select disabled class="form-control" name="<%= question.id %>">
             <% question.choices.reverse.each do |choice| %>
               <% unless @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>

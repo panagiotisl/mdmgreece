@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140819124745) do
     t.integer  "filling_id"
     t.integer  "question_id"
     t.string   "content"
+    t.date     "date"
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -41,6 +41,10 @@ class FormsController < ApplicationController
         @answer.content = params[question.id.to_s]
       elsif question.category == "number"
         @answer.content = params[question.id.to_s]
+      elsif question.category == "date"
+        puts "PAOK"
+        puts params[question.id.to_s]
+        @answer.date = params[question.id.to_s]
       elsif question.category == "multiple"
         @pick = @answer.picks.build
         @pick.choice_id = params[question.id.to_s]
@@ -48,6 +52,13 @@ class FormsController < ApplicationController
         #  flash[:error] = @pick.errors.full_messages.to_sentence
         #  raise ActiveRecord::Rollback
         #end
+      elsif question.category == "checkbox"
+        if params[question.id.to_s]
+          params[question.id.to_s].each do |choice_id|
+            @pick = @answer.picks.build
+            @pick.choice_id = choice_id
+          end
+        end
       elsif question.category == "dropdown"
         @pick = @answer.picks.build
         @pick.choice_id = params[question.id.to_s]
@@ -98,7 +109,7 @@ class FormsController < ApplicationController
   end
   
   def filling_params
-    params.require(:filling).permit(:form_id, answers_attributes: [:id, :content, :category, :question_id, :_destroy, picks_attributes: [:id, :choice_id, :_destroy]])
+    params.require(:filling).permit(:form_id, answers_attributes: [:id, :content, :date, :category, :question_id, :_destroy, picks_attributes: [:id, :choice_id, :_destroy]])
   end
   
 end
