@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819124745) do
+ActiveRecord::Schema.define(version: 20150214072204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,12 @@ ActiveRecord::Schema.define(version: 20140819124745) do
   end
 
   add_index "choices", ["question_id"], name: "index_choices_on_question_id", using: :btree
+
+  create_table "databases", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "fillings", force: true do |t|
     t.integer  "form_id"
@@ -75,6 +81,15 @@ ActiveRecord::Schema.define(version: 20140819124745) do
   end
 
   add_index "questions", ["form_id"], name: "index_questions_on_form_id", using: :btree
+
+  create_table "records", force: true do |t|
+    t.string   "name"
+    t.integer  "database_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "records", ["database_id"], name: "index_records_on_database_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false

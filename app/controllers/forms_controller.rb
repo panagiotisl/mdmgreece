@@ -42,8 +42,6 @@ class FormsController < ApplicationController
       elsif question.category == "number"
         @answer.content = params[question.id.to_s]
       elsif question.category == "date"
-        puts "PAOK"
-        puts params[question.id.to_s]
         @answer.date = params[question.id.to_s]
       elsif question.category == "multiple"
         @pick = @answer.picks.build

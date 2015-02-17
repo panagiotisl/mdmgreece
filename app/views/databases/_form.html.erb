@@ -1,0 +1,31 @@
+<%= form_for @database, html: { class: 'form-inline' } do |f| %>
+  <% if @database.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@database.errors.count, "error") %> prohibited this database from being saved:</h2>
+
+      <ul>
+      <% @database.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+    <div class="actions panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">New Term Database</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <%= f.label :name, class: 'sr-only' %>
+          <div class="input-group">
+            <div class="input-group-addon">Name</div>
+            <%= f.text_field :name, :class => 'input-small form-control' %>
+          </div>
+        </div>
+        <%= f.submit 'Create', :name => nil, :class => 'btn btn-primary' %>
+      </div>
+    </div>
+
+<% end %>

@@ -8,5 +8,9 @@ class FillingsController < ApplicationController
     @filling = Filling.find(params[:id])
   end
 
+  def edit
+    @filling = Filling.find(params[:id])
+  end
+
 
 end

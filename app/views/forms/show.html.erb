@@ -5,7 +5,7 @@
 <%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_form_path(@filling.form), :class => "btn btn-default", :role => "button" %>
 <% end %>
 </h2>
-    <%= form_for @filling, :url => {:action => "fill"} do |f| %>
+    <%= form_for @filling, :url => {:controller => 'forms', :action => 'fill'} do |f| %>
 	<%= f.hidden_field :form_id, :value => params[:id] %>
     <% @filling.form.questions.reverse.each do |question| %>
     <div class="nested-fields transparent-box">

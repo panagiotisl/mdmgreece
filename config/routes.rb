@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  resources :databases
+
   devise_for :users, :controllers => {:registrations => "registrations"}
 
   resources :forms
   resources :fillings
+  resources :databases
 
   get '/inactive', to: 'users#index_inactive', as: :inactive
   get '/manage', to: 'users#index', as: :manage
