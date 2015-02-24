@@ -74,6 +74,52 @@ class FormsController < ApplicationController
     end
   end
 
+  def edit_fill
+    @filling = Filling.find(params[:id])
+    @filling.answers.each do |answer|
+      answer.destroy
+    end
+    @filling.form.questions.each do |question|
+      @answer = @filling.answers.build
+      @answer.category = question.category
+      @answer.question_id = question.id
+      if question.category == "text"
+        @answer.content = params[question.id.to_s]
+      elsif question.category == "number"
+        @answer.content = params[question.id.to_s]
+      elsif question.category == "date"
+        @answer.date = params[question.id.to_s]
+      elsif question.category == "multiple"
+        @pick = @answer.picks.build
+        @pick.choice_id = params[question.id.to_s]
+        #unless  @pick.save
+        #  flash[:error] = @pick.errors.full_messages.to_sentence
+        #  raise ActiveRecord::Rollback
+        #end
+      elsif question.category == "checkbox"
+        if params[question.id.to_s]
+          params[question.id.to_s].each do |choice_id|
+            @pick = @answer.picks.build
+            @pick.choice_id = choice_id
+          end
+        end
+      elsif question.category == "dropdown"
+        @pick = @answer.picks.build
+        @pick.choice_id = params[question.id.to_s]
+      end
+      #unless  @answer.save
+      #    flash[:error] = @answer.errors.full_messages.to_sentence
+      #    raise ActiveRecord::Rollback
+      #  end
+    end
+    if @filling.save
+      redirect_to @filling, notice: 'Filling was successfully edited.'
+    else
+      flash[:error] = @filling.errors.full_messages.to_sentence
+      render :show
+    end
+  end
+
 
   def stats
     @form = Form.find(params[:id])

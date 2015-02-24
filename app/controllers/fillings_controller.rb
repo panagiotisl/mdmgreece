@@ -6,10 +6,12 @@ class FillingsController < ApplicationController
 
   def show
     @filling = Filling.find(params[:id])
+    @show = TRUE
   end
 
   def edit
     @filling = Filling.find(params[:id])
+    @show = FALSE
   end
 
 

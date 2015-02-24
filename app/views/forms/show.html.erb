@@ -24,13 +24,13 @@
         </table>
       <% elsif question.category == "checkbox" %>
           <table class="table table-nonfluid">
-            <% question.choices.reverse.each do |choice| %>
+            <% question.choices.each do |choice| %>
                 <%= render :partial => "/fillings/checkbox_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
             <% end %>
           </table>
         <% elsif question.category == "dropdown" %>
           <select class="form-control" name="<%= question.id %>">
-            <% question.choices.reverse.each do |choice| %>
+            <% question.choices.each do |choice| %>
                 <%= render :partial => "/fillings/dropdown_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
             <% end %>
           </select>

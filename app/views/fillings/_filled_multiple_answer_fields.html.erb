@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <input type="radio" name="<%= question_id %>" value="<%= choice_id %>" disabled="true" <%= !checked ? "checked" : "" %> >
+        <input type="radio" name="<%= question_id %>" value="<%= choice_id %>" <%= @show ? 'disabled="true"' : '' %> <%= !checked ? "checked" : "" %> >
     </td>
     <td align="left">
         <%= content %>

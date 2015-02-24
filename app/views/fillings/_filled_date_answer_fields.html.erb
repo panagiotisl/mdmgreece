@@ -1,2 +1,11 @@
-<input class="big" type="text" name="<%= question_id %>" disabled="true" value="<%= date %>">
+<input class="big datepicker" type="text" name="<%= question_id %>" <%= @show ? 'disabled="true"' : '' %> value="<%= date %>">
 <span class="glyphicon glyphicon-calendar"></span>
+
+
+<script type="text/javascript">
+    $('.datepicker').datepicker({
+        autoclose: true,
+        todayBtn: true,
+        todayHighlight: true
+    });
+</script>

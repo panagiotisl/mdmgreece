@@ -1,1 +1,42 @@
-<%= render :template => 'forms/show' %>
+    <div class="container col-xs-10 center text-center">
+      <h2><%= @filling.form.title %></h2>
+
+      <%= form_for @filling, :url => {:controller => 'forms', :action => 'edit_fill'} do |f| %>
+          <%= f.hidden_field :form_id, :value => @filling.form.id %>
+          <% @filling.form.questions.reverse.each do |question| %>
+              <div class="nested-fields transparent-box">
+                <h4><%=question.description %></h4>
+                <% if question.category == "text" %>
+                    <%= render :partial => "/fillings/filled_text_answer_fields", :locals => {:question_id => question.id, :content => @filling.answers.where(:question_id => question.id.to_s).first.content} %>
+                <% elsif question.category == "number" %>
+                    <%= render :partial => "/fillings/filled_number_answer_fields", :locals => {:question_id => question.id, :content => @filling.answers.where(:question_id => question.id.to_s).first.content} %>
+                <% elsif question.category == "date" %>
+                    <%= render :partial => "/fillings/filled_date_answer_fields", :locals => {:question_id => question.id, :date => @filling.answers.where(:question_id => question.id.to_s).first.date} %>
+                <% elsif question.category == "multiple" %>
+                    <table class="table table-nonfluid">
+                      <% question.choices.each do |choice| %>
+                          <%= render :partial => "/fillings/filled_multiple_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id, :checked => @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty?} %>
+                      <% end %>
+                    </table>
+                <% elsif question.category == "checkbox" %>
+                    <table class="table table-nonfluid">
+                      <% question.choices.each do |choice| %>
+                          <%= render :partial => "/fillings/filled_checkbox_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id, :checked => @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty?} %>
+                      <% end %>
+                    </table>
+                <% elsif question.category == "dropdown" %>
+                    <select disabled class="form-control" name="<%= question.id %>">
+                      <% question.choices.each do |choice| %>
+                          <% unless @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+                              <%= render :partial => "/fillings/filled_dropdown_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
+                          <% end %>
+                      <% end %>
+                    </select>
+                <% end %>
+
+              </div>
+          <% end %>
+          <%= f.submit "Submit", :class => "btn btn-large btn-primary margin-top" %>
+      <% end %>
+    </div>
+    <!-- /container -->
