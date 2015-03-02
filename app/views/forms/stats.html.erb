@@ -1,5 +1,3 @@
-<%= javascript_include_tag '//www.google.com/jsapi', 'chartkick' %>
-
 <div class="container col-xs-10 center">
 
       <div class="margin-top text-center">
@@ -11,13 +9,20 @@
       <h3><%= question.description %></h3>
     </div>
     <% case question.category %>
-  <% when 'text' %>
+      <% when 'text' %>
           <%= pie_chart question.answers.group(:content).count %>
       <% when 'number' %>
           <%= column_chart question.answers.group(:content).count %>
       <% when 'multiple' %>
           <%= pie_chart question.picks.joins(:choice).group('choices.content').count %>
+      <% when 'checkbox' %>
+          <%= pie_chart question.picks.joins(:choice).group('choices.content').count %>
+      <% when 'denture' %>
+          <%= pie_chart question.picks.joins(:choice).group('choices.content').count %>
+      <% when 'dropdown' %>
+          <%= pie_chart question.picks.joins(:choice).group('choices.content').count %>
       <% end %>
+
   <% end %>
 
 </div>
