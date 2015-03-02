@@ -1,0 +1,83 @@
+<table class="table" style="empty-cells: hide">
+  <tr>
+    <% question.choices[0..7].each do |choice| %>
+        <td>
+          <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+        </td>
+    <% end %>
+    <td style="border-left: 1px solid">
+      <% choice = question.choices[8] %>
+      <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+      <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+    </td>
+    <% question.choices[9..15].each do |choice| %>
+        <td>
+          <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+        </td>
+    <% end %>
+  </tr>
+  <tr>
+    <% question.choices[16..23].each do |choice| %>
+        <td>
+          <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+        </td>
+    <% end %>
+    <td style="border-left: 1px solid">
+      <% choice = question.choices[24] %>
+      <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+    </td>
+    <% question.choices[25..31].each do |choice| %>
+        <td>
+          <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw(raw('disabled="true"')) : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+        </td>
+    <% end %>
+  </tr>
+  <tr>
+    <% 16.times do %>
+        <td>&nbsp;</td>
+    <% end %>
+    <% question.choices[32..36].each do |choice| %>
+        <td>
+          <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+        </td>
+    <% end %>
+    <td style="border-left: 1px solid">
+      <% choice = question.choices[37] %>
+      <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+      <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+    </td>
+    <% question.choices[38..41].each do |choice| %>
+        <td>
+          <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+        </td>
+    <% end %>
+  </tr>
+  <tr>
+    <% 16.times do %>
+        <td>&nbsp;</td>
+    <% end %>
+    <% question.choices[42..46].each do |choice| %>
+        <td>
+          <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+        </td>
+    <% end %>
+    <td style="border-left: 1px solid">
+      <% choice = question.choices[47] %>
+      <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+      <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+    </td>
+    <% question.choices[48..51].each do |choice| %>
+        <td>
+          <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
+        </td>
+    <% end %>
+  </tr>
+</table>

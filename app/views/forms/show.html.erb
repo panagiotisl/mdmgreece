@@ -6,7 +6,7 @@
 <% end %>
 </h2>
     <%= form_for @filling, :url => {:controller => 'forms', :action => 'fill'} do |f| %>
-	<%= f.hidden_field :form_id, :value => params[:id] %>
+      <%= f.hidden_field :form_id, :value => params[:id] %>
     <% @filling.form.questions.reverse.each do |question| %>
     <div class="nested-fields transparent-box">
         <h4><%=question.description %></h4>
@@ -22,12 +22,14 @@
             <%= render :partial => "/fillings/multiple_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
             <% end %>
         </table>
-      <% elsif question.category == "checkbox" %>
+        <% elsif question.category == "checkbox" %>
           <table class="table table-nonfluid">
             <% question.choices.each do |choice| %>
                 <%= render :partial => "/fillings/checkbox_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
             <% end %>
           </table>
+        <% elsif question.category == 'denture' %>
+          <%= render :partial => "/fillings/denture_answers_fields", :locals => {:question => question} %>
         <% elsif question.category == "dropdown" %>
           <select class="form-control" name="<%= question.id %>">
             <% question.choices.each do |choice| %>

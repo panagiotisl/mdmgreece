@@ -32,7 +32,7 @@ class FormsController < ApplicationController
   end
   
   def fill
-    @filling = Filling.create(filling_params)
+    @filling = Filling.new(filling_params)
     @filling.form.questions.each do |question|
       @answer = @filling.answers.build
       @answer.category = question.category
@@ -50,7 +50,7 @@ class FormsController < ApplicationController
         #  flash[:error] = @pick.errors.full_messages.to_sentence
         #  raise ActiveRecord::Rollback
         #end
-      elsif question.category == "checkbox"
+      elsif question.category == 'checkbox' || question.category == 'denture'
         if params[question.id.to_s]
           params[question.id.to_s].each do |choice_id|
             @pick = @answer.picks.build
@@ -70,6 +70,7 @@ class FormsController < ApplicationController
       redirect_to @filling, notice: 'Form was successfully filled.'
     else
       flash[:error] = @filling.errors.full_messages.to_sentence
+      #flash[:error] = "The form contains #{@filling.errors.count} errors and could not be saved."
       render :show
     end
   end
@@ -96,7 +97,7 @@ class FormsController < ApplicationController
         #  flash[:error] = @pick.errors.full_messages.to_sentence
         #  raise ActiveRecord::Rollback
         #end
-      elsif question.category == "checkbox"
+      elsif question.category == "checkbox" || question.category == 'denture'
         if params[question.id.to_s]
           params[question.id.to_s].each do |choice_id|
             @pick = @answer.picks.build

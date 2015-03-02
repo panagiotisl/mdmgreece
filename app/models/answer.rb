@@ -15,6 +15,7 @@ class Answer < ActiveRecord::Base
   def correctly_filled
     self.errors.add(:answer, 'You must fill in text questions') if self.category == 'text' and self.content.empty?
     self.errors.add(:answer, 'You must fill in number questions') if self.category == 'number' and self.content.empty?
+    self.errors.add(:answer, 'You must fill in date questions') if self.category == 'date' and self.date.nil?
     self.errors.add(:answer, 'You must select a choice in multiple choice questions') if self.category == 'multiple' and self.picks.size<1
     self.errors.add(:answer, 'You must select a choice in dropdown questions') if self.category == 'dropdown' and self.picks.size<1
   end

@@ -1,0 +1,72 @@
+<table class="table" style="empty-cells: hide">
+  <tr>
+    <% question.choices[0..7].each do |choice| %>
+        <td>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+        </td>
+    <% end %>
+    <td style="border-left: 1px solid">
+      <% choice = question.choices[8] %>
+      <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+    </td>
+    <% question.choices[9..15].each do |choice| %>
+        <td>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+        </td>
+    <% end %>
+  </tr>
+  <tr>
+    <% question.choices[16..23].each do |choice| %>
+        <td>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+        </td>
+    <% end %>
+    <td style="border-left: 1px solid">
+      <% choice = question.choices[24] %>
+      <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+    </td>
+    <% question.choices[25..31].each do |choice| %>
+        <td>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+        </td>
+    <% end %>
+  </tr>
+  <tr>
+    <% 16.times do %>
+    <td>&nbsp;</td>
+    <% end %>
+    <% question.choices[32..36].each do |choice| %>
+        <td>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+        </td>
+    <% end %>
+    <td style="border-left: 1px solid">
+      <% choice = question.choices[37] %>
+      <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+    </td>
+    <% question.choices[38..41].each do |choice| %>
+        <td>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+        </td>
+    <% end %>
+  </tr>
+  <tr>
+    <% 16.times do %>
+        <td>&nbsp;</td>
+    <% end %>
+    <% question.choices[42..46].each do |choice| %>
+        <td>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+        </td>
+    <% end %>
+    <td style="border-left: 1px solid">
+      <% choice = question.choices[47] %>
+      <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+    </td>
+    <% question.choices[48..51].each do |choice| %>
+        <td>
+          <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" value="<%= choice.id %>" <%= params[question.id.to_s] && params[question.id.to_s].include?(choice.id.to_s) ? "checked" : "" %>>
+        </td>
+    <% end %>
+  </tr>
+</table>

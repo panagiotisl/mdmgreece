@@ -24,15 +24,22 @@
             </ul>
         </div></h3>
     <%= f.fields_for :questions, @form.questions.reverse do |question| %>
-	  <% if question.object.category == "text" %>
-        <%= render 'text_question_fields', :f => question %>
-      <% elsif question.object.category == "number" %>
-        <%= render 'number_question_fields', :f => question %>
-	  <% elsif question.object.category == "multiple" %>
-	    <%= render 'multiple_question_fields', :f => question %>
-      <% elsif question.object.category == "dropdown" %>
-        <%= render 'dropdown_question_fields', :f => question %>
-      <% end %>
+          <% if question.object.category == "text" %>
+              <%= render 'text_question_fields', :f => question %>
+          <% elsif question.object.category == "number" %>
+              <%= render 'number_question_fields', :f => question %>
+          <% elsif question.object.category == "date" %>
+              <%= render 'date_question_fields', :f => question %>
+          <% elsif question.object.category == "multiple" %>
+              <%= render 'multiple_question_fields', :f => question %>
+          <% elsif question.object.category == "checkbox" %>
+              <%= render 'checkbox_question_fields', :f => question %>
+          <% elsif question.object.category == "dropdowdn" %>
+              <%= render 'dropdown_question_fields', :f => question %>
+
+          <% elsif question.object.category == "denture" %>
+              <%= render 'denture_question_fields', :f => question %>
+          <% end %>
     <% end %>
     </div>
 

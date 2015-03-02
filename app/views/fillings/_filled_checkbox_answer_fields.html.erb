@@ -1,8 +1,9 @@
 <tr>
   <td>
-    <input type="checkbox" name="<%= question_id %>[]" value="<%= choice_id %>" <%= @show ? 'disabled="true"' : '' %> <%= !checked ? "checked" : "" %> >
-  </td>
-  <td align="left">
-    <%= content %>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="<%= question_id %>[]" value="<%= choice_id %>" <%= @show ? 'disabled="true"' : '' %> <%= !checked ? "checked" : "" %> > <%= content %>
+      </label>
+    </div>
   </td>
 </tr>

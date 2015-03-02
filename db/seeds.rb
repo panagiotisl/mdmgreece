@@ -8,6 +8,7 @@
 admin = User.create(:email => 'admin@mdmgreece.gr', :password => 'foobar23', :password_confirmation => 'foobar23', :approved => true, :admin => true)
 user = User.create(:email => 'user1@mdmgreece.gr', :password => 'foobar33', :password_confirmation => 'foobar33', :approved => false)
 
+=begin
 form = Form.new
 form.title = 'Οφθαλμολογικό Τεστ'
 form.user_id = admin.id
@@ -45,6 +46,7 @@ File.open(File.join(Rails.root, 'db', 'eye.csv')) do |lines|
     filling.save!
   end
 end
+=end
 
 form = Form.new
 form.title = 'Οδοντιατρικό Τεστ'
@@ -53,15 +55,7 @@ form.questions.build(category: 'date', description: 'Ημερομηνία Εξέ
 form.questions.build(category: 'text', description: 'Περιοχή-Σχολείο')
 form.questions.build(category: 'number', description: 'Ηλικία')
 form.questions.build(category: 'text', description: 'Περιγραφή Εργασίας - Παρατηρήσεις')
-question5 = form.questions.build(category: 'checkbox', description: 'Εξέταση')
-18.step(11,-1) { |i| question5.choices.build(content: i) }
-21.step(28,1) { |i| question5.choices.build(content: i) }
-48.step(41,-1) { |i| question5.choices.build(content: i) }
-31.step(38,1) { |i| question5.choices.build(content: i) }
-55.step(51,-1) { |i| question5.choices.build(content: i) }
-61.step(65,1) { |i| question5.choices.build(content: i) }
-85.step(81,-1) { |i| question5.choices.build(content: i) }
-71.step(75,1) { |i| question5.choices.build(content: i) }
+question5 = form.questions.build(category: 'denture', description: 'Εξέταση')
 question6 = form.questions.build(category: 'multiple', description: 'Έχει επισκεφθεί ποτέ οδοντίατρο;')
 question6.choices.build(content: 'Όχι')
 question6.choices.build(content: 'Ναι')
