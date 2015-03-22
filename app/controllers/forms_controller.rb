@@ -154,7 +154,7 @@ class FormsController < ApplicationController
   end
   
   def filling_params
-    params.require(:filling).permit(:form_id, answers_attributes: [:id, :content, :date, :category, :question_id, :_destroy, picks_attributes: [:id, :choice_id, :_destroy]])
+    params.require(:filling).permit(:form_id, :serial, answers_attributes: [:id, :content, :date, :category, :question_id, :_destroy, picks_attributes: [:id, :choice_id, :_destroy]])
   end
   
 end

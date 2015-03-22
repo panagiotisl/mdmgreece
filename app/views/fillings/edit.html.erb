@@ -3,6 +3,10 @@
 
       <%= form_for @filling, :url => {:controller => 'forms', :action => 'edit_fill'} do |f| %>
           <%= f.hidden_field :form_id, :value => @filling.form.id %>
+          <div class="transparent-box">
+            <h4>Serial Number</h4>
+            <%= f.number_field :serial, :class => 'big' %>
+          </div>
           <% @filling.form.questions.reverse.each do |question| %>
               <div class="nested-fields transparent-box">
                 <h4><%=question.description %></h4>

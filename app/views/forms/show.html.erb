@@ -7,6 +7,15 @@
 </h2>
     <%= form_for @filling, :url => {:controller => 'forms', :action => 'fill'} do |f| %>
       <%= f.hidden_field :form_id, :value => params[:id] %>
+      <div class="transparent-box">
+        <h4>Serial Number</h4>
+        <%= f.number_field :serial, :class => 'big' %>
+      </div>
+
+      <% @filling.examinations.reverse.each do |examination| %>
+        <%= render :partial => '/fillings/examination' %>
+      <% end %>
+      <%= render :partial => 'fillings/examinaion', :locals => {:examination => @examination }%>
     <% @filling.form.questions.reverse.each do |question| %>
     <div class="nested-fields transparent-box">
         <h4><%=question.description %></h4>
