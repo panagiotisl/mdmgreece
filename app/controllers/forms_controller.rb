@@ -77,6 +77,7 @@ class FormsController < ApplicationController
 
   def edit_fill
     @filling = Filling.find(params[:id])
+    @filling.update(filling_params)
     @filling.answers.each do |answer|
       answer.destroy
     end
@@ -140,6 +141,7 @@ class FormsController < ApplicationController
   def show
     @form = Form.find(params[:id])
     @filling = @form.fillings.new
+    @examination = @filling.examinations.build
   end
   
   def destroy
@@ -154,7 +156,7 @@ class FormsController < ApplicationController
   end
   
   def filling_params
-    params.require(:filling).permit(:form_id, :serial, answers_attributes: [:id, :content, :date, :category, :question_id, :_destroy, picks_attributes: [:id, :choice_id, :_destroy]])
+    params.require(:filling).permit(:form_id, :serial, examinations_attributes: [:id, :content, :date], answers_attributes: [:id, :content, :date, :category, :question_id, :_destroy, picks_attributes: [:id, :choice_id, :_destroy]])
   end
   
 end

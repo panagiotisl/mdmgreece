@@ -1,0 +1,27 @@
+<div class="nested-fields transparent-box">
+
+<h4>Ημερομηνία Εξέτασης</h4>
+<% if disabled %>
+    <%= e.text_field :date, :class => 'big datepicker', 'data-provider' => 'datepicker', 'autoclose' =>  'true', 'disabled' => 'true' %>
+<% else %>
+    <%= e.text_field :date, :class => 'big datepicker', 'data-provider' => 'datepicker', 'autoclose' =>  'true' %>
+<% end %>
+<span class="glyphicon glyphicon-calendar"></span>
+<h4>Παρατηρήσεις</h4>
+<% if disabled %>
+    <%= e.text_field :content, :class => 'big', 'disabled' => 'true' %>
+<% else %>
+      <%= e.text_field :content, :class => 'big' %>
+<% end %>
+
+
+</div>
+
+<script type="text/javascript">
+    $('.datepicker').datepicker({
+        autoclose: true,
+        format: 'yyyy/mm/dd',
+        todayHighlight: true
+    });
+</script>
+

@@ -11,13 +11,16 @@
               class: 'btn btn-default btn-lg',
               method: :get %>
 
-    <%= form_for :filling do |f| %>
+    <%= form_for @filling do |f| %>
 	<%= f.hidden_field :form_id, :value => params[:id] %>
       <div class="transparent-box">
         <h4>Serial Number</h4>
         <%= f.number_field :serial, :disabled => true, :class => 'big' %>
       </div>
-    <% @filling.form.questions.reverse.each do |question| %>
+      <%= f.fields_for :examinations, f.object.examinations  do |e| %>
+          <%= render :partial => '/fillings/examination', :locals => { :e => e, :disabled => TRUE }%>
+      <% end %>
+      <% @filling.form.questions.reverse.each do |question| %>
     <div class="nested-fields transparent-box">
       <h4><%=question.description %></h4>
         <% if question.category == "text" %>

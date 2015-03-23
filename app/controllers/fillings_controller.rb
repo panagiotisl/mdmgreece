@@ -11,6 +11,7 @@ class FillingsController < ApplicationController
 
   def edit
     @filling = Filling.find(params[:id])
+    @examination = @filling.examinations.build
     @show = FALSE
   end
 
