@@ -51,10 +51,10 @@ end
 form = Form.new
 form.title = 'Οδοντιατρικό Τεστ'
 form.user_id = admin.id
-form.questions.build(category: 'date', description: 'Ημερομηνία Εξέτασης')
+#form.questions.build(category: 'date', description: 'Ημερομηνία Εξέτασης')
 form.questions.build(category: 'text', description: 'Περιοχή-Σχολείο')
 form.questions.build(category: 'number', description: 'Ηλικία')
-form.questions.build(category: 'text', description: 'Περιγραφή Εργασίας - Παρατηρήσεις')
+#form.questions.build(category: 'text', description: 'Περιγραφή Εργασίας - Παρατηρήσεις')
 question5 = form.questions.build(category: 'denture', description: 'Εξέταση')
 question6 = form.questions.build(category: 'multiple', description: 'Έχει επισκεφθεί ποτέ οδοντίατρο;')
 question6.choices.build(content: 'Όχι')
