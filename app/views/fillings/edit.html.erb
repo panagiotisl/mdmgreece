@@ -7,8 +7,10 @@
             <h4>Serial Number</h4>
             <%= f.number_field :serial, :class => 'big' %>
           </div>
+          <% @count = 1 %>
           <%= f.fields_for :examinations, f.object.examinations  do |e| %>
-              <%= render :partial => '/fillings/examination', :locals => { :e => e, :disabled => FALSE }%>
+              <%= render :partial => '/fillings/examination', :locals => { :e => e, :disabled => FALSE, :count => @count }%>
+              <% @count += 1 %>
           <% end %>
           <% @filling.form.questions.reverse.each do |question| %>
               <div class="nested-fields transparent-box">

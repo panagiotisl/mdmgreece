@@ -1,0 +1,33 @@
+<h1>Fillings of <%= @form.title %></h1>
+
+<table id="fillings" class="table-bordered display">
+  <thead>
+  <tr>
+    <th>Serial Number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @fillings.each do |filling| %>
+      <tr>
+        <td><%= filling.serial %></td>
+        <td><%= link_to 'Show', filling %></td>
+        <td><%= link_to 'Edit', edit_filling_path(filling) %></td>
+        <td><%= link_to 'Destroy', filling, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#fillings').dataTable();
+    });
+
+
+</script>

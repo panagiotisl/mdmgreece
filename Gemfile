@@ -32,7 +32,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'cocoon', '1.2.6'
 gem 'chartkick', '1.3.2'
 gem 'bootstrap-datepicker-rails'
-
+gem 'jquery-datatables-rails'
 gem 'pg', '0.15.1'
 
 #group :development, :test do

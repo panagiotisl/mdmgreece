@@ -1,7 +1,12 @@
 class FillingsController < ApplicationController
 
   def index
-    @fillings = Fillings.all
+    @fillings = Filling.all
+  end
+
+  def form_index
+    @form = Form.find(params[:id])
+    @fillings = @form.fillings.order(:serial)
   end
 
   def show

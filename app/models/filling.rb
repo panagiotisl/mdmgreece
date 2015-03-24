@@ -6,6 +6,8 @@ class Filling < ActiveRecord::Base
   accepts_nested_attributes_for :examinations, :reject_if => :all_blank, :allow_destroy => true
   validates_presence_of :form_id
   validates :serial, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :serial, uniqueness: { scope: :form_id,
+                                 message: 'serial should be unique in the scope of every form' }
 
 
 end

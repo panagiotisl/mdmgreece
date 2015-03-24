@@ -4,15 +4,17 @@
 <% if current_user %>
 <%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_form_path(@filling.form), :class => "btn btn-default", :role => "button" %>
 <% end %>
-</h2>
+ </h2>
     <%= form_for @filling, :url => {:controller => 'forms', :action => 'fill'} do |f| %>
       <%= f.hidden_field :form_id, :value => params[:id] %>
       <div class="transparent-box">
         <h4>Serial Number</h4>
         <%= f.number_field :serial, :class => 'big' %>
       </div>
+      <% @count = 1 %>
       <%= f.fields_for :examinations, f.object.examinations  do |e| %>
-              <%= render :partial => '/fillings/examination', :locals => { :e => e, :disabled => FALSE }%>
+              <%= render :partial => '/fillings/examination', :locals => { :e => e, :disabled => FALSE :count => @count }%>
+              <% @count += 1 %>
       <% end %>
     <% @filling.form.questions.reverse.each do |question| %>
     <div class="nested-fields transparent-box">

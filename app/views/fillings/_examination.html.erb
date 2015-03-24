@@ -1,6 +1,7 @@
 <div class="nested-fields transparent-box">
 
-<h4>Ημερομηνία Εξέτασης</h4>
+<h3>Εξέταση <%= count %></h3>
+  <h4>Ημερομηνία</h4>
 <% if disabled %>
     <%= e.text_field :date, :class => 'big datepicker', 'data-provider' => 'datepicker', 'autoclose' =>  'true', 'disabled' => 'true' %>
 <% else %>
