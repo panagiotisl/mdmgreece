@@ -71,6 +71,7 @@ class FormsController < ApplicationController
     else
       flash[:error] = @filling.errors.full_messages.to_sentence
       #flash[:error] = "The form contains #{@filling.errors.count} errors and could not be saved."
+      @examination = @filling.examinations.build
       render :show
     end
   end
@@ -118,6 +119,7 @@ class FormsController < ApplicationController
       redirect_to @filling, notice: 'Filling was successfully edited.'
     else
       flash[:error] = @filling.errors.full_messages.to_sentence
+      @examination = @filling.examinations.build
       render :show
     end
   end

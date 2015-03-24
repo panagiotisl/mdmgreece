@@ -21,6 +21,7 @@
                 <li><%= link_to_add_association 'Checkbox', f, :questions, { :partial => 'checkbox_question_fields', data: { :'association-insertion-traversal' => 'closest', :'association-insertion-node' => '.links', :'association-insertion-method' => :append } } %></li>
                 <li><%= link_to_add_association 'Dropdown', f, :questions, { :partial => 'dropdown_question_fields', data: { :'association-insertion-traversal' => 'closest', :'association-insertion-node' => '.links', :'association-insertion-method' => :append } } %></li>
                 <li class="divider"></li>
+                <li><%= link_to_add_association 'Οδοντοστοιχία', f, :questions, { :partial => 'denture_question_fields', data: { :'association-insertion-traversal' => 'closest', :'association-insertion-node' => '.links', :'association-insertion-method' => :append } } %></li>
             </ul>
         </div></h3>
     <%= f.fields_for :questions, @form.questions.reverse do |question| %>
