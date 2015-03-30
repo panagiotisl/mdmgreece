@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20150322123535) do
 
   create_table "examinations", force: true do |t|
     t.date     "date"
-    t.string   "content"
+    t.text     "content"
     t.integer  "filling_id"
     t.datetime "created_at"
     t.datetime "updated_at"

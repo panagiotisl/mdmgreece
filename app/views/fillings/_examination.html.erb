@@ -10,9 +10,9 @@
 <span class="glyphicon glyphicon-calendar"></span>
 <h4>Παρατηρήσεις</h4>
 <% if disabled %>
-    <%= e.text_field :content, :class => 'big', 'disabled' => 'true' %>
+    <%= e.text_area :content, :class => 'form-control', :rows => '3', 'disabled' => 'true' %>
 <% else %>
-      <%= e.text_field :content, :class => 'big' %>
+      <%= e.text_area :content, :class => 'form-control', :rows => '3' %>
 <% end %>
 
 
