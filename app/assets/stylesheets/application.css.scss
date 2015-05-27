@@ -92,7 +92,7 @@ html {
 body {
   height: 100%;  
 /*  background: url('http://ariadni.di.uoa.gr/shared/texture3.jpg') no-repeat center center fixed; */
-  background: image-url("background.jpg") no-repeat center center fixed;
+  /* background: image-url("background.jpg") no-repeat center center fixed; */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -119,7 +119,7 @@ body:before {
 }
 
 .navbar-nav {
-  background-color: #4AA02C; /* background color will be black for all browsers */
+  background-color: #197ABE; /* background color will be black for all browsers */
   background-image: none;
   background-repeat: no-repeat;
   filter: none;
