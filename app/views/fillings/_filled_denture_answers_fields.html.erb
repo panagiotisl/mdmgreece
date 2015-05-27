@@ -36,11 +36,9 @@
         </td>
     <% end %>
   </tr>
+  <tr><td></td></tr>
   <tr>
-    <% 16.times do %>
-        <td>&nbsp;</td>
-    <% end %>
-    <% question.choices[32..36].each do |choice| %>
+      <% question.choices[32..36].each do |choice| %>
         <td>
           <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
           <%= choice.content %><br /><input type="checkbox" name="<%= question.id %>[]" <%= @show ? raw('disabled="true"') : '' %> value="<%= choice.id %>" <%= !checked ? "checked" : "" %>>
@@ -59,9 +57,6 @@
     <% end %>
   </tr>
   <tr>
-    <% 16.times do %>
-        <td>&nbsp;</td>
-    <% end %>
     <% question.choices[42..46].each do |choice| %>
         <td>
           <% checked = @filling.answers.where(:question_id => question.id.to_s).first.picks.where(:choice_id => choice.id).empty? %>
