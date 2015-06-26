@@ -1,55 +1,55 @@
-<div class="container col-xs-10 center text-center">
-    <h2><%= @filling.form.title %> 
+<div class="container col-xs-7 center text-center">
+  <h2><%= @filling.form.title %>
 
-<% if current_user %>
-<%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_form_path(@filling.form), :class => "btn btn-default", :role => "button" %>
-<% end %>
- </h2>
-    <%= form_for @filling, :url => {:controller => 'forms', :action => 'fill'} do |f| %>
+    <% if current_user %>
+        <%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_form_path(@filling.form), :class => "btn btn-default", :role => "button" %>
+    <% end %>
+  </h2>
+  <%= form_for @filling, :url => {:controller => 'forms', :action => 'fill'} do |f| %>
       <%= f.hidden_field :form_id, :value => params[:id] %>
       <div class="transparent-box">
-        <h4>Serial Number</h4>
+        <h4>Αύξων Αριθμός</h4>
         <%= f.number_field :serial, :class => 'big' %>
       </div>
       <% @count = 1 %>
-      <%= f.fields_for :examinations, f.object.examinations  do |e| %>
-              <%= render :partial => '/fillings/examination', :locals => { :e => e, :disabled => FALSE, :count => @count }%>
-              <% @count += 1 %>
+      <%= f.fields_for :examinations, f.object.examinations do |e| %>
+          <%= render :partial => '/fillings/examination', :locals => {:e => e, :disabled => FALSE, :count => @count} %>
+          <% @count += 1 %>
       <% end %>
-    <% @filling.form.questions.reverse.each do |question| %>
-    <div class="nested-fields transparent-box">
-        <h4><%=question.description %></h4>
-        <% if question.category == "text" %>
-        <%= render :partial => "/fillings/text_answer_fields", :locals => {:question_id => question.id} %>
-        <% elsif question.category == "number" %>
-        <%= render :partial => "/fillings/number_answer_fields", :locals => {:question_id => question.id} %>
-        <% elsif question.category == "date" %>
-          <%= render :partial => "/fillings/date_answer_fields", :locals => {:question_id => question.id} %>
-        <% elsif question.category == "multiple" %>
-        <table class="table table-nonfluid">
-            <% question.choices.reverse.each do |choice| %>
-            <%= render :partial => "/fillings/multiple_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
-            <% end %>
-        </table>
-        <% elsif question.category == "checkbox" %>
-          <table class="table table-nonfluid">
-            <% question.choices.each do |choice| %>
-                <%= render :partial => "/fillings/checkbox_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
-            <% end %>
-          </table>
-        <% elsif question.category == 'denture' %>
-          <%= render :partial => "/fillings/denture_answers_fields", :locals => {:question => question} %>
-        <% elsif question.category == "dropdown" %>
-          <select class="form-control" name="<%= question.id %>">
-            <% question.choices.each do |choice| %>
-                <%= render :partial => "/fillings/dropdown_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
-            <% end %>
-          </select>
+      <% @filling.form.questions.reverse.each do |question| %>
+          <div class="nested-fields transparent-box">
+            <h4><%= question.description %></h4>
+            <% if question.category == "text" %>
+                <%= render :partial => "/fillings/text_answer_fields", :locals => {:question_id => question.id} %>
+            <% elsif question.category == "number" %>
+                <%= render :partial => "/fillings/number_answer_fields", :locals => {:question_id => question.id} %>
+            <% elsif question.category == "date" %>
+                <%= render :partial => "/fillings/date_answer_fields", :locals => {:question_id => question.id} %>
+            <% elsif question.category == "multiple" %>
+                <table class="table table-nonfluid">
+                  <% question.choices.reverse.each do |choice| %>
+                      <%= render :partial => "/fillings/multiple_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
+                  <% end %>
+                </table>
+            <% elsif question.category == "checkbox" %>
+                <table class="table table-nonfluid">
+                  <% question.choices.each do |choice| %>
+                      <%= render :partial => "/fillings/checkbox_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
+                  <% end %>
+                </table>
+            <% elsif question.category == 'denture' %>
+                <%= render :partial => "/fillings/denture_answers_fields", :locals => {:question => question} %>
+            <% elsif question.category == "dropdown" %>
+                <select class="form-control" name="<%= question.id %>">
+                  <% question.choices.each do |choice| %>
+                      <%= render :partial => "/fillings/dropdown_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
+                  <% end %>
+                </select>
 
-        <% end %>
-    </div>
-    <% end %>
-    <%= f.submit "Submit", :class => "btn btn-large btn-primary margin-top" %>
-    <% end %>
+            <% end %>
+          </div>
+      <% end %>
+      <%= f.submit "Submit", :class => "btn btn-large btn-primary margin-top" %>
+  <% end %>
 </div>
 <!-- /container -->

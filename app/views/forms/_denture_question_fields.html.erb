@@ -1,5 +1,6 @@
 <div class="nested-fields transparent-box">
-  <h4>Text question</h4>
+  <h4>Ερώτηση Οδοντοστοιχίας</h4>
+
   <div class="field">
     <%= f.hidden_field :category, :value => :denture %>
     <table class="table">
@@ -8,7 +9,7 @@
           <%= f.label :description %>
         </td>
         <td>
-          <%= f.text_field :description, :value => 'Εξέταση', :class => 'big' %>
+          <%= f.text_field :description, :value => 'Εξέταση οδοντοστοιχίας', :class => 'big' %>
         </td>
         <td style="width:7%">
           <%= link_to_remove_association raw("<span class=\"glyphicon glyphicon-remove\"></span>"), f %>
