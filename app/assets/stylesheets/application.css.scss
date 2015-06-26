@@ -29,7 +29,7 @@ footer {
   position: relative;
   margin-top: -36px;
   height: 30px;
-  clear:both;
+  clear: both;
   /*margin-top: 45px;
   padding-top: 5px;*/
   border-top: 1px solid $grayMediumLight;
@@ -85,13 +85,13 @@ ul.ui-autocomplete {
 /* universal */
 
 html {
-/*  overflow-y: scroll;*/
+  /*  overflow-y: scroll;*/
   height: 100%;
 }
 
 body {
-  height: 100%;  
-/*  background: url('http://ariadni.di.uoa.gr/shared/texture3.jpg') no-repeat center center fixed; */
+  height: 100%;
+  /*  background: url('http://ariadni.di.uoa.gr/shared/texture3.jpg') no-repeat center center fixed; */
   /* background: image-url("background.jpg") no-repeat center center fixed; */
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -101,11 +101,11 @@ body {
 
 /*Opera Fix*/
 body:before {
-	content:"";
-	height:100%;
-	float:left;
-	width:0;
-	margin-top:-32767px;
+  content: "";
+  height: 100%;
+  float: left;
+  width: 0;
+  margin-top: -32767px;
 }
 
 #wrap {
@@ -113,7 +113,7 @@ body:before {
 }
 
 #main {
-  overflow:auto;
+  overflow: auto;
   padding-top: 60px;
   padding-bottom: 40px;
 }
@@ -126,13 +126,13 @@ body:before {
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: #FFF;
+  color: #FFF;
 }
 
 .center {
-     float: none;
-     margin-left: auto;
-     margin-right: auto;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .text-center {
@@ -154,64 +154,68 @@ body:before {
   margin-top: 30px;
 }
 
+.huge-margin-top {
+  margin-top: 180px;
+}
 
 .line-height {
-  line-height: 140%; 
+  line-height: 140%;
   font-size: 10pt;
 }
 
 /*flash*/
 .alert-error {
-    background-color: #f2dede;
-    border-color: #eed3d7;
-    color: #b94a48;
-    text-align: left;
- }
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+  text-align: left;
+}
 
 .alert-alert {
-    background-color: #f2dede;
-    border-color: #eed3d7;
-    color: #b94a48;
-    text-align: left;
- }
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+  text-align: left;
+}
 
 .alert-success {
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    color: #468847;
-    text-align: left;
- }
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+  text-align: left;
+}
 
 .alert-notice {
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    color: #468847;
-    text-align: left;
- }
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+  text-align: left;
+}
 
 input.big {
-    width: 95%;
+  width: 95%;
 }
+
 input.medium {
-    width: 70%;
+  width: 70%;
 }
 
 .table-nonfluid {
-    width: auto;
+  width: auto;
 }
 
 table.center {
-    width:70%; 
-    margin-left:15%; 
-    margin-right:15%;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
 }
-  
+
 .transparent-box {
-    -moz-border-radius: 10px;  /* for Firefox */
-    -webkit-border-radius: 10px; /* for Webkit-Browsers */
-    border-radius:10px; /* regular */
-    background-color: #F6F6F6;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    margin-top: 15px;
+  -moz-border-radius: 10px; /* for Firefox */
+  -webkit-border-radius: 10px; /* for Webkit-Browsers */
+  border-radius: 10px; /* regular */
+  background-color: #F6F6F6;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 15px;
 }

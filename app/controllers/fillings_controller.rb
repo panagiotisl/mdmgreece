@@ -7,6 +7,11 @@ class FillingsController < ApplicationController
   def form_index
     @form = Form.find(params[:id])
     @fillings = @form.fillings.order(:serial)
+    respond_to do |format|
+      format.html
+      format.csv { send_data @fillings.to_csv }
+      format.xls
+    end
   end
 
   def show

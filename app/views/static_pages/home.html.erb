@@ -25,6 +25,12 @@
                     <td>
                         <%= link_to raw("<span class=\"glyphicon glyphicon-remove\"></span> Remove"), form, method: :delete, data: { confirm: 'Are you sure?' } %>
                     </td>
+                  <td>
+                    <%= link_to raw("<span class=\"glyphicon glyphicon-download\"></span> CSV"), fillings_index_path(form, format: 'csv') %>
+                  </td>
+                  <td>
+                    <%= link_to raw("<span class=\"glyphicon glyphicon-download\"></span> Excel"), fillings_index_path(form, format: 'xls') %>
+                  </td>
                 </tr>
                 <% end %>
             </tbody>
