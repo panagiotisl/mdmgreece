@@ -1,10 +1,10 @@
-<input class="big datepicker" type="text" name="<%= question_id %>" value="<%= params[question_id.to_s] %>" data-provide='datepicker' autoclose="true">
+<input class="big datepicker" type="text" name="<%= question_id %>" value="<%= params[question_id.to_s] %>" data-provider='datepicker' autoclose="true">
 <span class="glyphicon glyphicon-calendar"></span>
 
 <script type="text/javascript">
     $('.datepicker').datepicker({
         autoclose: true,
-        format: 'yyyy/mm/dd',
+        format: 'dd/mm/yyyy',
         todayHighlight: true
     });
 </script>

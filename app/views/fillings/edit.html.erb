@@ -9,7 +9,7 @@
           </div>
           <% @count = 1 %>
           <%= f.fields_for :examinations, f.object.examinations  do |e| %>
-              <%= render :partial => '/fillings/examination', :locals => { :e => e, :disabled => FALSE, :count => @count }%>
+          <%= render :partial => '/fillings/examination', :locals => {:e => e, :disabled => FALSE, :count => @count, :date => e.object.date.blank? ? '' : e.object.date.strftime('%d/%m/%Y')} %>
               <% @count += 1 %>
           <% end %>
           <% @filling.form.questions.reverse.each do |question| %>

@@ -25,5 +25,10 @@ class FillingsController < ApplicationController
     @show = FALSE
   end
 
+  def destroy
+    Filling.find(params[:id]).destroy
+    redirect_to fillings_index_path, :flash => {:success => "Filling removed."}
+  end
+
 
 end
