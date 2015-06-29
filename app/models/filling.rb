@@ -15,31 +15,35 @@ class Filling < ActiveRecord::Base
   def self.to_csv
     CSV.generate do |csv|
       @questions = ['Αύξων Αριθμός', 'Ημερομηνία', 'Εξέταση']
-      all.first.form.questions.reverse.each do |question|
-        @questions << question.description
-      end
-      csv << @questions
-      all.each do |filling|
-        filling.examinations.each do |examination|
-          @filling = []
-          @filling << filling.serial
-          @filling << examination.date
-          @filling << examination.content
-          filling.answers.order(question_id: :asc).each do |answer|
-            @content = answer.content
-            if @content.nil? or @content.empty?
-              @choices = []
-              answer.picks.each do |pick|
-                @choices << pick.choice.content.to_s.strip
+      unless all.first.nil?
+        all.first.form.questions.reverse.each do |question|
+          @questions << question.description
+        end
+        csv << @questions
+        all.each do |filling|
+          filling.examinations.each do |examination|
+            @filling = []
+            @filling << filling.serial
+            @filling << examination.date
+            @filling << examination.content
+            filling.answers.order(question_id: :asc).each do |answer|
+              @content = answer.content
+              if @content.nil? or @content.empty?
+                @choices = []
+                answer.picks.each do |pick|
+                  @choices << pick.choice.content.to_s.strip
+                end
+                @filling << @choices.join(', ')
+              else
+                @filling << answer.content.to_s.strip
               end
-              @filling << @choices.join(', ')
-            else
-              @filling << answer.content.to_s.strip
             end
+            csv << @filling
           end
-          csv << @filling
         end
       end
     end
   end
+
+
 end
