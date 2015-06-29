@@ -26,8 +26,10 @@ class FillingsController < ApplicationController
   end
 
   def destroy
-    Filling.find(params[:id]).destroy
-    redirect_to fillings_index_path, :flash => {:success => "Filling removed."}
+    @filling = Filling.find(params[:id])
+    @form = @filling.form
+    @filling.destroy
+    redirect_to fillings_index_path(:id => @form.id), :flash => {:success => "Filling removed."}
   end
 
 
