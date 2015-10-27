@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322123535) do
+ActiveRecord::Schema.define(version: 20151027111929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20150322123535) do
   create_table "examinations", force: true do |t|
     t.date     "date"
     t.text     "content"
+    t.text "doctor"
+    t.text "program"
     t.integer  "filling_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150322123535) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "serial"
+    t.text "area"
   end
 
   add_index "fillings", ["form_id"], name: "index_fillings_on_form_id", using: :btree
@@ -70,6 +73,12 @@ ActiveRecord::Schema.define(version: 20150322123535) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean "serial_enabled"
+    t.boolean "area_enabled"
+    t.boolean "date_enabled"
+    t.boolean "content_enabled"
+    t.boolean "doctor_enabled"
+    t.boolean "program_enabled"
   end
 
   create_table "picks", force: true do |t|

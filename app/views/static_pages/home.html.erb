@@ -8,13 +8,7 @@
                 <% @my_forms.each do |form| %>
                 <tr>
                     <td>
-                        <%= form.title %>
-                    </td>
-                    <td>
-                      <%= link_to "Filled #{form.fillings.size} time(s)", fillings_index_path(form) %>
-                    </td>
-                    <td>
-                      <%= link_to "Stats", stats_path(form) %>
+                      <%= link_to "#{form.title}: Filled #{form.fillings.size} time(s)", fillings_index_path(form) %>
                     </td>
                     <td>
                         <%= link_to raw("<span class=\"glyphicon glyphicon-pencil\"></span> Fill"), form %>

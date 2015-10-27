@@ -1,16 +1,21 @@
 <div class="container col-xs-7 center text-center">
-  <h2><%= @filling.form.title %>
+  <h2><%= link_to @filling.form.title, fillings_index_path %>
 
-    <% if current_user %>
-        <%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span>"), edit_form_path(@filling.form), :class => "btn btn-default", :role => "button" %>
-    <% end %>
   </h2>
   <%= form_for @filling, :url => {:controller => 'forms', :action => 'fill'} do |f| %>
       <%= f.hidden_field :form_id, :value => params[:id] %>
+      <% if @filling.form.serial_enabled %>
       <div class="transparent-box">
         <h4>Αύξων Αριθμός</h4>
         <%= f.number_field :serial, :class => 'big' %>
       </div>
+      <% end %>
+      <% if @filling.form.area_enabled %>
+          <div class="transparent-box">
+            <h4>Περιοχή</h4>
+            <%= f.autocomplete_field :area, autocomplete_filling_area_forms_path, :class => 'big' %>
+          </div>
+      <% end %>
       <% @count = 1 %>
       <%= f.fields_for :examinations, f.object.examinations do |e| %>
           <%= render :partial => '/fillings/examination', :locals => {:e => e, :disabled => FALSE, :count => @count, :date => e.object.date.blank? ? '' : e.object.date.strftime('%d/%m/%Y')} %>
@@ -26,13 +31,13 @@
             <% elsif question.category == "date" %>
                 <%= render :partial => "/fillings/date_answer_fields", :locals => {:question_id => question.id} %>
             <% elsif question.category == "multiple" %>
-                <table class="table table-nonfluid">
-                  <% question.choices.reverse.each do |choice| %>
+                <table class="table table-nonfluid text-left">
+                  <% question.choices.each do |choice| %>
                       <%= render :partial => "/fillings/multiple_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
                   <% end %>
                 </table>
             <% elsif question.category == "checkbox" %>
-                <table class="table table-nonfluid">
+                <table class="table table-nonfluid text-left">
                   <% question.choices.each do |choice| %>
                       <%= render :partial => "/fillings/checkbox_answer_fields", :locals => {:question_id => question.id, :content => choice.content, :choice_id => choice.id} %>
                   <% end %>

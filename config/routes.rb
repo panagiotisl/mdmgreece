@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => "registrations"}
 
-  resources :forms
+  resources :forms do
+    get :autocomplete_examination_doctor, :on => :collection
+    get :autocomplete_examination_program, :on => :collection
+    get :autocomplete_filling_area, :on => :collection
+  end
   resources :fillings
   resources :databases
 

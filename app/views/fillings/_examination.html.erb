@@ -1,25 +1,49 @@
 <div class="nested-fields transparent-box">
 
+  <% if @filling.form.date_enabled or @filling.form.content_enabled or @filling.form.doctor_enabled or @filling.form.program_enabled %>
 <h3>Εξέταση <%= count %></h3>
+
+      <% if @filling.form.date_enabled %>
   <h4>Ημερομηνία</h4>
 <% if disabled %>
       <%= e.text_field :date, :value => date, :class => 'big datepicker', 'data-provider' => 'datepicker', 'autoclose' => 'true', 'disabled' => 'true' %>
   <% else %>
       <%= e.text_field :date, :value => date, :class => 'big datepicker', 'data-provider' => 'datepicker', 'autoclose' => 'true' %>
   <% end %>
-
-
   <span class="glyphicon glyphicon-calendar"></span>
+      <% end %>
+
+      <% if @filling.form.content_enabled %>
 <h4>Παρατηρήσεις</h4>
 <% if disabled %>
     <%= e.text_area :content, :class => 'form-control', :rows => '3', 'disabled' => 'true' %>
 <% else %>
       <%= e.text_area :content, :class => 'form-control', :rows => '3' %>
 <% end %>
+      <% end %>
+
+      <% if @filling.form.doctor_enabled %>
+          <h4>Γιατρός</h4>
+          <% if disabled %>
+              <%= e.autocomplete_field :doctor, autocomplete_examination_doctor_forms_path, :class => 'form-control', 'disabled' => 'true' %>
+          <% else %>
+              <%= e.autocomplete_field :doctor, autocomplete_examination_doctor_forms_path, :class => 'form-control' %>
+          <% end %>
+          `
+      <% end %>
+
+      <% if @filling.form.doctor_enabled %>
+          <h4>Πρόγραμμα</h4>
+          <% if disabled %>
+              <%= e.autocomplete_field :program, autocomplete_examination_program_forms_path, :class => 'form-control', 'disabled' => 'true' %>
+          <% else %>
+              <%= e.autocomplete_field :program, autocomplete_examination_program_forms_path, :class => 'form-control' %>
+          <% end %>
+      <% end %>
 
 
-</div>
-
+      </div>
+  <% end %>
 <script type="text/javascript">
     $('.datepicker').datepicker({
         autoclose: true,

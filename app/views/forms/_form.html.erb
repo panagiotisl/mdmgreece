@@ -8,6 +8,41 @@
       </table>
     </div>
 
+    <div class="form-group">
+      <%= f.label :serial_enabled, :class => 'checkbox form-control' do %>
+          <%= f.check_box :serial_enabled %>Αύξων Αριθμός
+      <% end %>
+    </div>
+    <div class="form-group">
+      <%= f.label :area_enabled, :class => 'checkbox form-control' do %>
+          <%= f.check_box :area_enabled %>Περιοχή
+      <% end %>
+    </div>
+    <div id="examination">
+      <h3>Ενεργά Πεδία Εξέτασης</h3>
+
+      <div class="form-group">
+        <%= f.label :date_enabled, :class => 'checkbox form-control' do %>
+            <%= f.check_box :date_enabled %>Ημερομηνία
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :content_enabled, :class => 'checkbox form-control' do %>
+            <%= f.check_box :content_enabled %>Παρατηρήσεις
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :doctor_enabled, :class => 'checkbox form-control' do %>
+            <%= f.check_box :doctor_enabled %>Ιατρός
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :program_enabled, :class => 'checkbox form-control' do %>
+            <%= f.check_box :program_enabled %>Πρόγραμμα
+        <% end %>
+      </div>
+    </div>
+
     <div id="questions">
       <div class="links">
         <h3>Questions

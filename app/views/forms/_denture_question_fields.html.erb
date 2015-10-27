@@ -3,6 +3,24 @@
 
   <div class="field">
     <%= f.hidden_field :category, :value => :denture %>
+    <ta_text_question_fields.html.erbble class="table">
+      <tr>
+        <td style="width:15%">
+          <%= f.label :description %>
+        </td>
+        <td>
+          <%= f.text_field :description, :value => 'Εξέταση οδοντοστοιχίας', :class => 'big' %>
+        </td>
+        <td style="width:7%">
+          <%= link_to_remove_association raw("<span class=\"glyphicon glyphicon-remove\"></span>"), f %>
+        </td>
+      </tr>
+    </ta_text_question_fields.html.erbble>
+  </div>
+
+  <!--
+  <div class="field">
+    <%= f.hidden_field :category, :value => :denture %>
     <table class="table">
       <tr>
         <td style="width:15%">
@@ -17,5 +35,6 @@
       </tr>
     </table>
   </div>
+  -->
   <div style="clear: both;"></div>
 </div>

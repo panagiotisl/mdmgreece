@@ -1,6 +1,18 @@
-<h1>Fillings of <%= @form.title %></h1>
+<div class="container col-xs-7 center text-center">
 
-<table id="fillings" class="table-bordered display">
+
+  <h2>Fillings of <%= @form.title %></h2>
+
+  <%= link_to raw('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Fill'),
+              form_path(@form),
+              class: 'btn btn-default btn-lg',
+              method: :get %>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#statsModal">
+    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Stats
+  </button>
+
+  <table id="fillings" class="table-bordered display">
   <thead>
   <tr>
     <th>Αύξων Αριθμός</th>
@@ -22,12 +34,121 @@
   </tbody>
 </table>
 
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action="<%= stats_path %>">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Stats Selection</h4>
+        </div>
+        <div class="modal-body">
+
+
+          <div id="examination">
+            <h3>Ενεργά Πεδία Αναζήτησης</h3>
+            <% if @form.date_enabled %>
+                <div class="form-group form-inline">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="date"> Ημερομηνία
+                    </label>&nbsp;&nbsp;&nbsp;
+                    Από: <input class="datepicker" type="text" name="from" data-provider='datepicker' autoclose="true">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                    Έως: <input class="datepicker" type="text" name="to" data-provider='datepicker' autoclose="true">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </div>
+                </div>
+            <% end %>
+            <% if @form.area_enabled %>
+                <div class="form-group form-inline">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="area"> Περιοχή
+                    </label>
+                  </div>
+                </div>
+            <% end %>
+            <% if false and @form.content_enabled %>
+                <div class="form-group form-inline">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="content"> Παρατηρήσεις
+                    </label>&nbsp;&nbsp;&nbsp;
+                    Χαρακτήρας: <input type="text" name="delimiter" value="#">
+                  </div>
+                </div>
+            <% end %>
+            <% if @form.doctor_enabled %>
+                <div class="form-group form-inline">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="doctor"> Ιατρός
+                    </label>
+                  </div>
+                </div>
+            <% end %>
+            <% if @form.program_enabled %>
+                <div class="form-group form-inline">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="program"> Πρόγραμμα
+                    </label>
+                  </div>
+                </div>
+            <% end %>
+          </div>
+          <h3>Επιλογή Από Συμπληρωματικές Ερωτήσεις</h3>
+
+          <div class="form-group form-inline">
+            <div class="checkbox">
+              <label>
+                <input type="radio" name="question" value=""> Καμία
+              </label>
+            </div>
+          </div>
+
+          <% @form.questions.each do |q| %>
+              <% if q.category == 'text' or q.category == 'number' %>
+                  <div class="form-group form-inline">
+                    <div class="checkbox">
+                      <label>
+                        <input type="radio" name="question" value=<%= q.id %>> <%= q.description %>
+                      </label>
+                    </div>
+                  </div>
+              <% end %>
+          <% end %>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-stats"></span> Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 <script type="text/javascript">
     $(document).ready(function () {
         $('#fillings').dataTable();
     });
-
-
 </script>
+
+<script type="text/javascript">
+    $('.datepicker').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+        todayHighlight: true
+    });
+</script>
+

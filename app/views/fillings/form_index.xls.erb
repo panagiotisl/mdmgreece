@@ -4,17 +4,26 @@
           xmlns:x="urn:schemas-microsoft-com:office:excel"
           xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
           xmlns:html="http://www.w3.org/TR/REC-html40">
-  <Worksheet ss:Name=<%= @form.title %>>
+  <Worksheet ss:Name="<%= @form.title %>">
     <Table>
       <Row>
         <Cell>
           <Data ss:Type="String">Αύξων Αριθμός</Data>
         </Cell>
         <Cell>
+          <Data ss:Type="String">Περιοχή</Data>
+        </Cell>
+        <Cell>
           <Data ss:Type="String">Ημερομηνία</Data>
         </Cell>
         <Cell>
           <Data ss:Type="String">Εξέταση</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Ιατρός</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Πρόγραμμα</Data>
         </Cell>
         <% @form.questions.reverse.each do |question| %>
             <Cell>
@@ -29,25 +38,33 @@
                   <Data ss:Type="String"><%= filling.serial %></Data>
                 </Cell>
                 <Cell>
+                  <Data ss:Type="String"><%= filling.area %></Data>
+                </Cell>
+                <Cell>
                   <Data ss:Type="String"><%= examination.date %></Data>
                 </Cell>
                 <Cell>
                   <Data ss:Type="String"><%= examination.content %></Data>
                 </Cell>
+                <Cell>
+                  <Data ss:Type="String"><%= examination.doctor %></Data>
+                </Cell>
+                <Cell>
+                  <Data ss:Type="String"><%= examination.program %></Data>
+                </Cell>
                 <% filling.answers.order(question_id: :asc).each do |answer| %>
                     <Cell>
-                      <Data ss:Type="String">
-                        <% @content = answer.content %>
-                        <% if @content.nil? or @content.empty? %>
-                            <% @choices = [] %>
-                            <% answer.picks.each do |pick| %>
-                                <% @choices << pick.choice.content.to_s.strip %>
-                            <% end %>
-                            <%= @choices.join(', ') %>
-                        <% else %>
-                            <%= answer.content.to_s.strip %>
-                        <% end %>
-                      </Data>
+                      <% @content = answer.content %>
+                      <% if @content.nil? or @content.empty? %>
+                          <% @choices = [] %>
+                          <% answer.picks.each do |pick| %>
+                              <% @choices << pick.choice.content.to_s.strip %>
+                          <% end %>
+                          <% @result = @choices.join(', ') %>
+                      <% else %>
+                          <% @result = answer.content.to_s %>
+                      <% end %>
+                      <Data ss:Type="String"><%= @result %></Data>
                     </Cell>
                 <% end %>
               </Row>

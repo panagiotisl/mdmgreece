@@ -20,7 +20,7 @@
         <div class="links">
             <h4>Choices <%= link_to_add_association 'Add a choice', f, :choices, :class => "btn btn-default", :role => "button", data: {:'association-insertion-traversal' => 'closest', :'association-insertion-node' => '.links', :'association-insertion-method' => :append} %>
             </h4>
-            <%= f.fields_for :choices, f.object.choices.reverse do |choice| %>
+          <%= f.fields_for :choices, f.object.choices do |choice| %>
             <%= render 'choice_fields', :f => choice %>
             <% end %>
         </div>

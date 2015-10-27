@@ -2,7 +2,7 @@ class FormsController < ApplicationController
   
   before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
   before_action :authenticate_destroy!, only: [:edit, :update, :destroy]
-  
+
   def new
     @form = Form.new
   end
@@ -19,6 +19,10 @@ class FormsController < ApplicationController
   
   def edit
     @form = Form.find(params[:id])
+    if @form.fillings.count > 0
+      flash[:error] = 'The form has already been filled and cannot be edited.'
+      redirect_to request.referer
+    end
   end
   
   def update
@@ -126,7 +130,55 @@ class FormsController < ApplicationController
 
 
   def stats
+
     @form = Form.find(params[:id])
+    select = "SELECT count(*) AS countall"
+    if params["question"].nil? or params["question"] == ""
+      where = "WHERE e.filling_id = f.id AND form_id = #{params[:id]}"
+      from = "FROM examinations e, fillings f"
+    else
+      where = "WHERE e.filling_id = f.id AND f.id = a.filling_id AND form_id = #{params[:id]}"
+      from = "FROM examinations e, fillings f, answers a"
+    end
+
+
+    groupby = "GROUP BY"
+    if params[:area] == "on"
+      select += ", area"
+      groupby += "#{groupby.length==8 ? ' ' : ', '}area"
+    end
+    if params[:date] == "on"
+      if params[:from] != ""
+        where += " AND date >= '#{params[:from]}'"
+      end
+      if params[:to] != ""
+        where += " AND date <= '#{params[:to]}'"
+      end
+    end
+    if params[:program] == "on"
+      select += ", program"
+      groupby += "#{groupby.length==8 ? ' ' : ', '}program"
+    end
+    if params[:doctor] == "on"
+      select += ", doctor"
+      groupby += "#{groupby.length==8 ? ' ' : ', '}doctor"
+    end
+    question = 0
+    unless params["question"].nil? or params["question"] == ""
+      where += " AND a.question_id = #{params["question"]}"
+      select += ", a.content AS question"
+      groupby += "#{groupby.length==8 ? ' ' : ', '}a.content"
+    end
+    @examinations = Examination.find_by_sql("#{select} #{from} #{where} #{groupby.length==8 ? "" : groupby}")
+    @hash = {}
+    @examinations.each do |e|
+      hash = params["question"].nil? ? "" : "#{e.attributes["question"]}"
+      hash += "#{params[:area]=="on" ? (hash.length>0 ? "-" : "") + e.area : ""}"
+      hash +="#{params[:doctor]=="on" ? (hash.length>0 ? "-" : "") + e.doctor : ""}"
+      hash +="#{params[:program]=="on" ? (hash.length>0 ? "-" : "") + e.program : ""}"
+      @hash[hash] = e.countall
+    end
+
   end
 
 
@@ -148,17 +200,29 @@ class FormsController < ApplicationController
   
   def destroy
     Form.find(params[:id]).destroy
-    redirect_to forms_path, :flash => { :success => "Form destroyed." }
+    redirect_to forms_path, :flash => {:success => 'Form destroyed.'}
   end
-  
+
+  def autocomplete_filling_area
+    render json: Filling.select('DISTINCT area as value').where('LOWER(area) like LOWER(?)', "%#{params[:term]}%")
+  end
+
+  def autocomplete_examination_doctor
+    render json: Examination.select('DISTINCT doctor as value').where('LOWER(doctor) like LOWER(?)', "%#{params[:term]}%")
+  end
+
+  def autocomplete_examination_program
+    render json: Examination.select('DISTINCT program as value').where('LOWER(program) like LOWER(?)', "%#{params[:term]}%")
+  end
+
   private
-  
+
   def form_params
-    params.require(:form).permit(:user_id, :title, questions_attributes: [:id, :description, :category, :_destroy, choices_attributes: [:id, :content, :_destroy]])
+    params.require(:form).permit(:user_id, :title, :serial_enabled, :area_enabled, :date_enabled, :content_enabled, :doctor_enabled, :program_enabled, questions_attributes: [:id, :description, :category, :_destroy, choices_attributes: [:id, :content, :_destroy]])
   end
   
   def filling_params
-    params.require(:filling).permit(:form_id, :serial, examinations_attributes: [:id, :content, :date], answers_attributes: [:id, :content, :date, :category, :question_id, :_destroy, picks_attributes: [:id, :choice_id, :_destroy]])
+    params.require(:filling).permit(:form_id, :serial, :area, examinations_attributes: [:id, :content, :date, :doctor, :program], answers_attributes: [:id, :content, :date, :category, :question_id, :_destroy, picks_attributes: [:id, :choice_id, :_destroy]])
   end
   
 end

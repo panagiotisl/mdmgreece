@@ -1,3 +1,7 @@
+<input class="big" type="text" name="<%= question.id %>" value="<%= params[question.id.to_s] %>">
+
+<% if false %>
+
 <table class="table" style="empty-cells: hide">
   <tr>
     <% question.choices[0..7].each do |choice| %>
@@ -70,3 +74,5 @@
     <% end %>
   </tr>
 </table>
+
+<% end %>

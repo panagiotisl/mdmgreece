@@ -14,7 +14,7 @@ class Filling < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate do |csv|
-      @questions = ['Αύξων Αριθμός', 'Ημερομηνία', 'Εξέταση']
+      @questions = ['Αύξων Αριθμός', 'Περιοχή', 'Ημερομηνία', 'Εξέταση', 'Ιατρός', 'Πρόγραμμα']
       unless all.first.nil?
         all.first.form.questions.reverse.each do |question|
           @questions << question.description
@@ -24,8 +24,11 @@ class Filling < ActiveRecord::Base
           filling.examinations.each do |examination|
             @filling = []
             @filling << filling.serial
+            @filling << filling.area
             @filling << examination.date
             @filling << examination.content
+            @filling << examination.doctor
+            @filling << examination.program
             filling.answers.order(question_id: :asc).each do |answer|
               @content = answer.content
               if @content.nil? or @content.empty?

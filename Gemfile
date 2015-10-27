@@ -34,6 +34,7 @@ gem 'chartkick', '1.3.2'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-datatables-rails'
 gem 'pg', '0.15.1'
+gem 'rails4-autocomplete'
 
 #group :development, :test do
 #  gem 'sqlite3'
