@@ -149,10 +149,10 @@ class FormsController < ApplicationController
     end
     if params[:date] == "on"
       if params[:from] != ""
-        where += " AND date >= to_date('#{params[:from]}', 'DD/MM/YYYY')"
+        where += " AND e.date >= to_date('#{params[:from]}', 'DD/MM/YYYY')"
       end
       if params[:to] != ""
-        where += " AND date <= to_date('#{params[:to]}', 'DD/MM/YYYY')"
+        where += " AND e.date <= to_date('#{params[:to]}', 'DD/MM/YYYY')"
       end
     end
     if params[:program] == "on"
