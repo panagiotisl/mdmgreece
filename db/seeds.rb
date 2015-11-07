@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 admin = User.create(:email => 'admin@mdmgreece.gr', :password => 'foobar23', :password_confirmation => 'foobar23', :approved => true, :admin => true)
-user = User.create(:email => 'user1@mdmgreece.gr', :password => 'foobar33', :password_confirmation => 'foobar33', :approved => false)
+#user = User.create(:email => 'user1@mdmgreece.gr', :password => 'foobar33', :password_confirmation => 'foobar33', :approved => false)
 
 =begin
 form = Form.new
@@ -48,6 +48,7 @@ File.open(File.join(Rails.root, 'db', 'eye.csv')) do |lines|
 end
 =end
 
+=begin
 form = Form.new
 form.title = 'Οδοντιατρικό Τεστ'
 form.user_id = admin.id
@@ -64,3 +65,4 @@ question8 = form.questions.build(category: 'multiple', description: 'Βρίσκ�
 question8.choices.build(content: 'Όχι')
 question8.choices.build(content: 'Ναι')
 form.save
+=end
