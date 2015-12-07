@@ -1,6 +1,6 @@
 class FormsController < ApplicationController
-  
-  before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
+
+  before_action :authenticate_user!, only: [:fill, :edit_fill, :stats, :index, :show, :new, :create, :edit, :update, :destroy]
   before_action :authenticate_destroy!, only: [:edit, :update, :destroy]
 
   def new

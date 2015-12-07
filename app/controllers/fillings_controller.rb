@@ -1,5 +1,8 @@
 class FillingsController < ApplicationController
 
+  before_action :authenticate_user!, only: [:form_index, :index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :authenticate_destroy!, only: [:edit, :update, :destroy]
+
   def index
     @fillings = Filling.all
   end
