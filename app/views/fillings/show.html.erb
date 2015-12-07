@@ -14,7 +14,7 @@
   <%= form_for @filling do |f| %>
       <%= f.hidden_field :form_id, :value => params[:id] %>
       <div class="transparent-box">
-        <h4>Αύξων Αριθμός</h4>
+        <h4>Αύξων Αριθμός Ασθενούς</h4>
         <%= f.number_field :serial, :disabled => true, :class => 'big' %>
       </div>
       <% if @filling.form.area_enabled %>
@@ -22,11 +22,6 @@
             <h4>Περιοχή</h4>
             <%= f.text_field :area, :disabled => true, :class => 'big' %>
           </div>
-      <% end %>
-      <% @count = 1 %>
-      <%= f.fields_for :examinations, f.object.examinations do |e| %>
-          <%= render :partial => '/fillings/examination', :locals => {:e => e, :disabled => TRUE, :count => @count, :date => e.object.date.blank? ? '' : e.object.date.strftime('%d/%m/%Y')} %>
-          <% @count += 1 %>
       <% end %>
       <% @filling.form.questions.reverse.each do |question| %>
           <div class="nested-fields transparent-box">
@@ -36,6 +31,7 @@
             <% elsif question.category == "number" %>
                 <%= render :partial => "/fillings/filled_number_answer_fields", :locals => {:question_id => question.id, :content => @filling.answers.where(:question_id => question.id.to_s).first.content} %>
             <% elsif question.category == "date" %>
+                <h6>(ΗΗ/ΜΜ/ΕΕΕΕ)</h6>
                 <%= render :partial => "/fillings/filled_date_answer_fields", :locals => {:question_id => question.id, :date => @filling.answers.where(:question_id => question.id.to_s).first.date} %>
             <% elsif question.category == "multiple" %>
                 <table class="table table-nonfluid text-left">
@@ -63,6 +59,12 @@
 
           </div>
       <% end %>
+      <% @count = 1 %>
+      <%= f.fields_for :examinations, f.object.examinations do |e| %>
+          <%= render :partial => '/fillings/examination', :locals => {:e => e, :disabled => TRUE, :count => @count, :date => e.object.date.blank? ? '' : e.object.date.strftime('%d/%m/%Y')} %>
+          <% @count += 1 %>
+      <% end %>
+
   <% end %>
 </div>
 <!-- /container -->

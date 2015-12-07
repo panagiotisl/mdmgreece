@@ -4,7 +4,7 @@
       <%= form_for @filling, :url => {:controller => 'forms', :action => 'edit_fill'} do |f| %>
           <%= f.hidden_field :form_id, :value => @filling.form.id %>
           <div class="transparent-box">
-            <h4>Αύξων Αριθμός</h4>
+            <h4>Αύξων Αριθμός Ασθενούς</h4>
             <%= f.number_field :serial, :class => 'big' %>
           </div>
       <% if @filling.form.area_enabled %>
@@ -13,11 +13,7 @@
             <%= f.autocomplete_field :area, autocomplete_filling_area_forms_path, :class => 'big' %>
           </div>
       <% end %>
-      <% @count = 1 %>
-          <%= f.fields_for :examinations, f.object.examinations  do |e| %>
-          <%= render :partial => '/fillings/examination', :locals => {:e => e, :disabled => FALSE, :count => @count, :date => e.object.date.blank? ? '' : e.object.date.strftime('%d/%m/%Y')} %>
-              <% @count += 1 %>
-          <% end %>
+
           <% @filling.form.questions.reverse.each do |question| %>
               <div class="nested-fields transparent-box">
                 <h4><%=question.description %></h4>
@@ -53,6 +49,11 @@
 
               </div>
           <% end %>
+      <% @count = 1 %>
+      <%= f.fields_for :examinations, f.object.examinations do |e| %>
+          <%= render :partial => '/fillings/examination', :locals => {:e => e, :disabled => FALSE, :count => @count, :date => e.object.date.blank? ? '' : e.object.date.strftime('%d/%m/%Y')} %>
+          <% @count += 1 %>
+      <% end %>
           <%= f.submit "Submit", :class => "btn btn-large btn-primary margin-top" %>
       <% end %>
     </div>

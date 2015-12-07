@@ -2,9 +2,12 @@
 
   <% if @filling.form.date_enabled or @filling.form.content_enabled or @filling.form.doctor_enabled or @filling.form.program_enabled %>
 <h3>Εξέταση <%= count %></h3>
-
+      <% if count == 1 %>
+          <h6>(Η πρώτη εξέταση για τον συγκεκριμένο ασθενή, όταν υποβληθεί η φόρμα θα είναι διαθέσιμη και η
+            δεύτερη)</h6>
+      <% end %>
       <% if @filling.form.date_enabled %>
-  <h4>Ημερομηνία</h4>
+          <h4>Ημερομηνία</h4><h6>(ΗΗ/ΜΜ/ΕΕΕΕ)</h6>
 <% if disabled %>
       <%= e.text_field :date, :value => date, :class => 'big datepicker', 'data-provider' => 'datepicker', 'autoclose' => 'true', 'disabled' => 'true' %>
   <% else %>
@@ -29,7 +32,6 @@
           <% else %>
               <%= e.autocomplete_field :doctor, autocomplete_examination_doctor_forms_path, :class => 'form-control' %>
           <% end %>
-          `
       <% end %>
 
       <% if @filling.form.doctor_enabled %>
